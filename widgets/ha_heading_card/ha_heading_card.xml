@@ -1,6 +1,6 @@
 <widget>
 	<previews>
-		<preview width="320" height="240" style_bg_color="0xeee" />
+		<preview width="320" height="240" style_bg_color="0xd5ebc4" />
 	</previews>
 
 	<api>
@@ -11,7 +11,14 @@
 
 	<styles />
 
-	<view width="100%" height="content" style_pad_all="0" style_border_width="0">
+	<view
+		width="100%"
+		height="content"
+		style_bg_color="0xFF0000"
+		style_bg_opa="0"
+		style_pad_all="0"
+		style_border_width="0"
+	>
 		<!-- Add widgets/components here -->
 		<lv_obj
 			name="main"
@@ -19,39 +26,75 @@
 			flex_flow="row"
 			width="100%"
 			height="content"
+			style_bg_opa="0"
 			style_pad_all="0"
 			style_pad_column="8"
 			style_flex_main_place="space_between"
+			style_flex_cross_place="center"
+			style_border_width="0"
 		>
-			<lv_obj name="title_ctn" scrollable="false" style_pad_all="0" style_border_width="0">
+			<lv_obj
+				name="title_ctn"
+				width="100"
+				height="content"
+				scrollable="false"
+				style_pad_all="0"
+				style_border_width="0"
+				style_bg_opa="0"
+			>
 				<lv_obj
 					name="title_row"
 					style_layout="flex"
 					flex_flow="row"
 					scrollable="false"
 					width="100%"
+					height="content"
 					style_clip_corner="true"
+					style_bg_opa="0"
+					style_pad_all="0"
+					style_border_width="0"
+					style_pad_column="4"
+					style_flex_main_place="start"
+					style_flex_cross_place="center"
+					style_flex_track_place="center"
 				>
 					<lv_label name="title_icon" text="&#xF02DC;" style_text_font="mdi_icon_font18_4" />
 					<lv_label
 						name="title_label"
 						text="Helloaaaaaaaaaaaaaaaaaaaa"
-						style_text_font="roboto_regular_12_4"
+						style_text_font="roboto_regular_14_4"
 					/>
 				</lv_obj>
 			</lv_obj>
-			<lv_obj name="badges_ctn" style_pad_all="0" style_border_width="0" width="content">
+			<lv_obj
+				name="badges_ctn"
+				width="200"
+				height="content"
+				style_bg_opa="0"
+				style_pad_all="0"
+				scrollbar_mode="off"
+				style_border_width="0"
+			>
 				<lv_obj
 					name="badges_row"
 					style_layout="flex"
 					flex_flow="row"
-					style_flex_main_place="end"
+					style_flex_main_place="start"
+					style_flex_cross_place="center"
+					style_flex_track_place="center"
 					width="content"
+					height="content"
+					scrollable="true"
+					scrollbar_mode="off"
+					style_pad_all="0"
+					style_border_width="0"
+					style_bg_opa="0"
 				>
 					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="Hello" />
 					<hui_heading_badge h_type="TEXT" icon="&#xF02DC;" text="World" />
 					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="AAAA" />
-					<hui_heading_badge h_type="TEXT" icon="&#xF02DC;" text="World" />
+					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="AAAA" />
+					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="AAAA" />
 				</lv_obj>
 			</lv_obj>
 		</lv_obj>

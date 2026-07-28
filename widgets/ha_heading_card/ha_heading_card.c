@@ -33,12 +33,20 @@
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
+void refresh(lv_obj_t *obj)
+{
+    // LV_LOG_INFO("111");
+    // LV_LOG_USER("A: %d, b: %d, c: %d", 1, 2, 3);
+    
+    // int32_t content_natural_width = lv_obj_get_width(root->label);
+    // content_natural_width += lv_obj_get_style_pad_left(root->content, 0);
+    // content_natural_width += lv_obj_get_style_pad_right(root->content, 0);
+
+}
 
 void ha_heading_card_constructor_hook(lv_obj_t * obj)
 {
-    ha_heading_card_t *root = (ha_heading_card_t *)obj;
-    lv_obj_set_width(root->title_ctn, 50);
-    lv_obj_set_width(root->badges_ctn, 250);
+    refresh(obj);
 }
 
 void ha_heading_card_destructor_hook(lv_obj_t * obj)

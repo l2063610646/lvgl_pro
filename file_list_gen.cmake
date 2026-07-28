@@ -7,7 +7,9 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font18_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font24_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_12_4_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_14_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_16_4_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_18_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/screens/home/home_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_heading_card/ha_heading_card_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_heading_card/ha_heading_card_xml_parser.c

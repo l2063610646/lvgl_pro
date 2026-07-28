@@ -27,6 +27,7 @@ extern "C" {
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
+void refresh(lv_obj_t *obj);
 
 /**********************
  *      MACROS

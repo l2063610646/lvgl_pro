@@ -67,10 +67,14 @@ lv_font_t * mdi_icon_font16_4;
 extern lv_font_t mdi_icon_font16_4_data;
 lv_font_t * mdi_icon_font18_4;
 extern lv_font_t mdi_icon_font18_4_data;
-lv_font_t * roboto_regular_16_4;
-extern lv_font_t roboto_regular_16_4_data;
 lv_font_t * roboto_regular_12_4;
 extern lv_font_t roboto_regular_12_4_data;
+lv_font_t * roboto_regular_14_4;
+extern lv_font_t roboto_regular_14_4_data;
+lv_font_t * roboto_regular_16_4;
+extern lv_font_t roboto_regular_16_4_data;
+lv_font_t * roboto_regular_18_4;
+extern lv_font_t roboto_regular_18_4_data;
 
 /*----------------
  * Images
@@ -123,16 +127,28 @@ void demo3_init_gen(const char * asset_path)
             mdi_icon_font18_4 = &mdi_icon_font18_4_data;
 
         }
+        if (!roboto_regular_12_4) {
+            /* roboto_regular_12_4 */
+            /* get font 'roboto_regular_12_4' from a C array */
+            roboto_regular_12_4 = &roboto_regular_12_4_data;
+
+        }
+        if (!roboto_regular_14_4) {
+            /* roboto_regular_14_4 */
+            /* get font 'roboto_regular_14_4' from a C array */
+            roboto_regular_14_4 = &roboto_regular_14_4_data;
+
+        }
         if (!roboto_regular_16_4) {
             /* roboto_regular_16_4 */
             /* get font 'roboto_regular_16_4' from a C array */
             roboto_regular_16_4 = &roboto_regular_16_4_data;
 
         }
-        if (!roboto_regular_12_4) {
-            /* roboto_regular_12_4 */
-            /* get font 'roboto_regular_12_4' from a C array */
-            roboto_regular_12_4 = &roboto_regular_12_4_data;
+        if (!roboto_regular_18_4) {
+            /* roboto_regular_18_4 */
+            /* get font 'roboto_regular_18_4' from a C array */
+            roboto_regular_18_4 = &roboto_regular_18_4_data;
 
         }
     }
@@ -172,15 +188,19 @@ void demo3_init_gen(const char * asset_path)
     check_font(&mdi_icon_font24_4, "mdi_icon_font24_4");
     check_font(&mdi_icon_font16_4, "mdi_icon_font16_4");
     check_font(&mdi_icon_font18_4, "mdi_icon_font18_4");
-    check_font(&roboto_regular_16_4, "roboto_regular_16_4");
     check_font(&roboto_regular_12_4, "roboto_regular_12_4");
+    check_font(&roboto_regular_14_4, "roboto_regular_14_4");
+    check_font(&roboto_regular_16_4, "roboto_regular_16_4");
+    check_font(&roboto_regular_18_4, "roboto_regular_18_4");
 
     /* Register fonts */
     lv_xml_register_font(NULL, "mdi_icon_font24_4", mdi_icon_font24_4);
     lv_xml_register_font(NULL, "mdi_icon_font16_4", mdi_icon_font16_4);
     lv_xml_register_font(NULL, "mdi_icon_font18_4", mdi_icon_font18_4);
-    lv_xml_register_font(NULL, "roboto_regular_16_4", roboto_regular_16_4);
     lv_xml_register_font(NULL, "roboto_regular_12_4", roboto_regular_12_4);
+    lv_xml_register_font(NULL, "roboto_regular_14_4", roboto_regular_14_4);
+    lv_xml_register_font(NULL, "roboto_regular_16_4", roboto_regular_16_4);
+    lv_xml_register_font(NULL, "roboto_regular_18_4", roboto_regular_18_4);
 
     /* Register subjects */
 

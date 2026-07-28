@@ -76,8 +76,10 @@ bool demo3_check_target(uint32_t target);
 extern lv_font_t * mdi_icon_font24_4;
 extern lv_font_t * mdi_icon_font16_4;
 extern lv_font_t * mdi_icon_font18_4;
-extern lv_font_t * roboto_regular_16_4;
 extern lv_font_t * roboto_regular_12_4;
+extern lv_font_t * roboto_regular_14_4;
+extern lv_font_t * roboto_regular_16_4;
+extern lv_font_t * roboto_regular_18_4;
 
 
 /*----------------
