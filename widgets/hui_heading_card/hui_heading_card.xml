@@ -1,0 +1,54 @@
+<widget>
+	<previews>
+		<preview width="400" height="240" style_bg_color="0xeee" />
+	</previews>
+
+	<api>
+		<!-- Add your API here. For example 
+		<prop name="prop1" type="int" default="0" help="What is this property?"/>
+		-->
+	</api>
+
+	<styles />
+
+	<view width="100%" height="content">
+		<!-- Add widgets/components here -->
+		<lv_obj
+			name="card"
+			scrollable="false"
+			width="content"
+			height="content"
+			style_layout="flex"
+			style_flex_cross_place="center"
+			flex_flow="row"
+			style_pad_all="0"
+			style_pad_column="8"
+			style_border_width="0"
+		>
+			<lv_obj
+				name="content"
+				height="content"
+				style_layout="flex"
+				style_pad_all="0"
+				style_border_width="0"
+				scrollable="false"
+			>
+				<lv_label text="&#xF02DC;" style_text_font="mdi_icon_font18_4" />
+				<lv_label name="label" width="content" long_mode="clip" />
+			</lv_obj>
+			<lv_obj
+				name="badges"
+				height="content"
+				style_layout="flex"
+				flex_flow="row"
+				style_border_width="0"
+				style_pad_all="0"
+				style_pad_column="8"
+			>
+				<hui_heading_badge icon="&#xF02DC;" text="Hello" />
+				<hui_heading_badge h_type="TEXT" text="blank" />
+				<hui_heading_badge icon="&#xF02DC;" text="World" />
+			</lv_obj>
+		</lv_obj>
+	</view>
+</widget>

@@ -1,0 +1,51 @@
+<globals>
+	<api>
+		<!-- Add <enumdefs> here -->
+	</api>
+
+	<consts>
+		<!-- Add <px>, <int>, <color> etc here -->
+	</consts>
+
+	<styles>
+		<!-- Add <style> tags here -->
+	</styles>
+
+	<subjects>
+		<!-- Add <int>, <string>, or <float> subjects here -->
+	</subjects>
+
+	<images>
+		<!-- Add <file> or <data> tags here -->
+	</images>
+
+	<fonts>
+		<!-- Add <bin> , <tiny_ttf>, <freetype> tags here -->
+		<bin
+			name="mdi_icon_font24_4"
+			as_file="false"
+			src_path="fonts/materialdesignicons-webfont.ttf"
+			bpp="4"
+			size="24"
+			range="0xF02DC,0xF0415,0xF0374"
+		/>
+		<bin
+			name="mdi_icon_font16_4"
+			as_file="false"
+			src_path="fonts/materialdesignicons-webfont.ttf"
+			bpp="4"
+			size="16"
+			range="0xF02DC,0xF0415,0xF0374"
+		/>
+		<bin
+			name="mdi_icon_font18_4"
+			as_file="false"
+			src_path="fonts/materialdesignicons-webfont.ttf"
+			bpp="4"
+			size="18"
+			range="0xF02DC,0xF0415,0xF0374"
+		/>
+		<bin name="roboto_regular_16_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="16" />
+		<bin name="roboto_regular_12_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="12" />
+	</fonts>
+</globals>

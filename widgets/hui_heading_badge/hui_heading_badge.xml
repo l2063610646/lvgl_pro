@@ -1,0 +1,52 @@
+<widget>
+	<previews>
+		<preview width="320" height="240" style_bg_color="0xeee" />
+	</previews>
+
+	<api>
+		<!-- Add your API here. For example 
+		<prop name="prop1" type="int" default="0" help="What is this property?"/>
+		-->
+		<enumdef name="hui_heading_badge_type_def">
+			<enum name="TEXT" value="0" />
+			<enum name="BUTTON" value="1" />
+		</enumdef>
+
+		<prop name="h_type" type="enum:hui_heading_badge_type_def" />
+		<prop name="text" type="string" />
+		<prop name="icon" type="string" />
+		<prop name="text_color" type="color" />
+		<prop name="icon_color" type="color" />
+	</api>
+
+	<styles>
+		<style
+			name="style_base"
+			bg_opa="0%"
+			border_width="0"
+			border_opa="0"
+			pad_all="0"
+			pad_row="8"
+			pad_column="3"
+			layout="flex"
+			flex_flow="row"
+			flex_main_place="center"
+			flex_cross_place="center"
+			flex_track_place="center"
+			width="content"
+			height="26"
+			bg_color="0x6080e0"
+		/>
+		<style name="button_style" bg_color="0x5e5e5e" bg_opa="50%" radius="9999" pad_right="8" pad_left="8" />
+	</styles>
+
+	<view name="main" extends="lv_obj">
+		<style name="style_base" />
+		<style name="button_style" />
+
+		<!-- Add widgets/components here -->
+		<ha_ripple name="ripple" p_pressed_opacity="15" p_radius="12" />
+		<lv_label name="label_icon" text="" style_text_font="mdi_icon_font16_4" />
+		<lv_label name="label_text" text="" style_text_font="roboto_regular_12_4" />
+	</view>
+</widget>

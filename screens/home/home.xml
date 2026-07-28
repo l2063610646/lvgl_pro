@@ -1,0 +1,17 @@
+<screen>
+	<view extends="lv_obj">
+		<!-- Add your code here -->
+		<!-- <lv_label text="&#xF02DC;" style_text_font="mdi_icon_font24_4" /> -->
+
+		<lv_obj name="col" flex_flow="column" style_layout="flex" align="center" width="content" height="content">
+			<lv_obj name="test" style_layout="flex" flex_flow="row" align="center" width="content" height="content">
+				<hui_heading_badge h_type="BUTTON" text="Hello" icon="&#xF02DC;" />
+				<hui_heading_badge h_type="TEXT" text="World" icon="&#xF02DC;" />
+			</lv_obj>
+			<lv_obj width="400">
+				<hui_heading_card />
+			</lv_obj>
+			<ha_heading_card width="400" />
+		</lv_obj>
+	</view>
+</screen>

@@ -1,0 +1,59 @@
+<widget>
+	<previews>
+		<preview width="320" height="240" style_bg_color="0xeee" />
+	</previews>
+
+	<api>
+		<!-- Add your API here. For example 
+		<prop name="prop1" type="int" default="0" help="What is this property?"/>
+		-->
+	</api>
+
+	<styles />
+
+	<view width="100%" height="content" style_pad_all="0" style_border_width="0">
+		<!-- Add widgets/components here -->
+		<lv_obj
+			name="main"
+			style_layout="flex"
+			flex_flow="row"
+			width="100%"
+			height="content"
+			style_pad_all="0"
+			style_pad_column="8"
+			style_flex_main_place="space_between"
+		>
+			<lv_obj name="title_ctn" scrollable="false" style_pad_all="0" style_border_width="0">
+				<lv_obj
+					name="title_row"
+					style_layout="flex"
+					flex_flow="row"
+					scrollable="false"
+					width="100%"
+					style_clip_corner="true"
+				>
+					<lv_label name="title_icon" text="&#xF02DC;" style_text_font="mdi_icon_font18_4" />
+					<lv_label
+						name="title_label"
+						text="Helloaaaaaaaaaaaaaaaaaaaa"
+						style_text_font="roboto_regular_12_4"
+					/>
+				</lv_obj>
+			</lv_obj>
+			<lv_obj name="badges_ctn" style_pad_all="0" style_border_width="0" width="content">
+				<lv_obj
+					name="badges_row"
+					style_layout="flex"
+					flex_flow="row"
+					style_flex_main_place="end"
+					width="content"
+				>
+					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="Hello" />
+					<hui_heading_badge h_type="TEXT" icon="&#xF02DC;" text="World" />
+					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="AAAA" />
+					<hui_heading_badge h_type="TEXT" icon="&#xF02DC;" text="World" />
+				</lv_obj>
+			</lv_obj>
+		</lv_obj>
+	</view>
+</widget>
