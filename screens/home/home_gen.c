@@ -56,27 +56,17 @@ lv_obj_t * home_create(void)
         lv_obj_set_align(test, LV_ALIGN_CENTER);
         lv_obj_set_width(test, LV_SIZE_CONTENT);
         lv_obj_set_height(test, LV_SIZE_CONTENT);
-        lv_obj_t * hui_heading_badge_0 = hui_heading_badge_create(test);
-        hui_heading_badge_set_h_type(hui_heading_badge_0, HUI_HEADING_BADGE_TYPE_DEF_BUTTON);
-        hui_heading_badge_set_text(hui_heading_badge_0, "Hello");
-        hui_heading_badge_set_icon(hui_heading_badge_0, "󰋜");
+        lv_obj_t * lv_obj_1 = lv_obj_create(test);
+        lv_obj_set_flag(lv_obj_1, LV_OBJ_FLAG_HIDDEN, true);
 
-        lv_obj_t * hui_heading_badge_1 = hui_heading_badge_create(test);
-        hui_heading_badge_set_h_type(hui_heading_badge_1, HUI_HEADING_BADGE_TYPE_DEF_TEXT);
-        hui_heading_badge_set_text(hui_heading_badge_1, "World");
-        hui_heading_badge_set_icon(hui_heading_badge_1, "󰋜");
+        lv_obj_t * lv_label_0 = lv_label_create(test);
+        lv_label_set_text(lv_label_0, "VV");
 
-        lv_obj_t * lv_obj_1 = lv_obj_create(col);
-        lv_obj_set_width(lv_obj_1, 400);
-        hui_heading_card_create(lv_obj_1);
-
-        lv_obj_t * ha_heading_card_0 = ha_heading_card_create(col);
-        lv_obj_set_width(ha_heading_card_0, 400);
-        ha_heading_card_set_heading(ha_heading_card_0, "012345678901234");
-
-        lv_obj_t * ha_heading_card_1 = ha_heading_card_create(col);
-        lv_obj_set_width(ha_heading_card_1, 400);
-        ha_heading_card_set_heading(ha_heading_card_1, "01234");
+        lv_obj_t * lv_obj_2 = lv_obj_create(col);
+        lv_obj_set_width(lv_obj_2, 300);
+        lv_obj_set_style_pad_all(lv_obj_2, 0, 0);
+        lv_obj_set_style_layout(lv_obj_2, LV_LAYOUT_FLEX, 0);
+        lv_obj_set_flex_flow(lv_obj_2, LV_FLEX_FLOW_COLUMN);
 
         the_root = lv_obj_0;
     }

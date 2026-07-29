@@ -5,14 +5,10 @@
 
 		<lv_obj name="col" flex_flow="column" style_layout="flex" align="center" width="content" height="content">
 			<lv_obj name="test" style_layout="flex" flex_flow="row" align="center" width="content" height="content">
-				<hui_heading_badge h_type="BUTTON" text="Hello" icon="&#xF02DC;" />
-				<hui_heading_badge h_type="TEXT" text="World" icon="&#xF02DC;" />
+				<lv_obj hidden="true" />
+				<lv_label text="VV" />
 			</lv_obj>
-			<lv_obj width="400">
-				<hui_heading_card />
-			</lv_obj>
-			<ha_heading_card width="400" heading="012345678901234" />
-			<ha_heading_card width="400" heading="01234" />
+			<lv_obj width="300" style_pad_all="0" style_layout="flex" flex_flow="column" />
 		</lv_obj>
 	</view>
 </screen>

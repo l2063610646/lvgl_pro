@@ -9,10 +9,8 @@
 #include "demo3_gen.h"
 
 #if defined(LV_USE_XML) && LV_USE_XML
-#include "widgets/ha_heading_card/ha_heading_card_private_gen.h"
 #include "widgets/ha_ripple/ha_ripple_private_gen.h"
 #include "widgets/hui_heading_badge/hui_heading_badge_private_gen.h"
-#include "widgets/hui_heading_card/hui_heading_card_private_gen.h"
 #endif /* LV_USE_XML */
 
 /*********************
@@ -178,10 +176,8 @@ void demo3_init_gen(const char * asset_path)
 
 #if defined(LV_USE_XML) && LV_USE_XML
     /* Register widgets */
-    ha_heading_card_register();
     ha_ripple_register();
     hui_heading_badge_register();
-    hui_heading_card_register();
 
     /* Check all fonts / default if needed. This prevents fonts that are used in one target but
        defined in another from causing assertion failures during rendering of the Preview. */
