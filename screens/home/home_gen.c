@@ -72,6 +72,11 @@ lv_obj_t * home_create(void)
 
         lv_obj_t * ha_heading_card_0 = ha_heading_card_create(col);
         lv_obj_set_width(ha_heading_card_0, 400);
+        ha_heading_card_set_heading(ha_heading_card_0, "012345678901234");
+
+        lv_obj_t * ha_heading_card_1 = ha_heading_card_create(col);
+        lv_obj_set_width(ha_heading_card_1, 400);
+        ha_heading_card_set_heading(ha_heading_card_1, "01234");
 
         the_root = lv_obj_0;
     }

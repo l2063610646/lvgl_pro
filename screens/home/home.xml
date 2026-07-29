@@ -11,7 +11,8 @@
 			<lv_obj width="400">
 				<hui_heading_card />
 			</lv_obj>
-			<ha_heading_card width="400" />
+			<ha_heading_card width="400" heading="012345678901234" />
+			<ha_heading_card width="400" heading="01234" />
 		</lv_obj>
 	</view>
 </screen>

@@ -67,6 +67,11 @@ void ha_heading_card_xml_apply(lv_xml_parser_state_t * state, const char ** attr
     for(int i = 0; attrs[i]; i += 2) {
         const char * name = attrs[i];
         const char * value = attrs[i + 1];
+        if(lv_streq("heading", name)) {
+            ha_heading_card_set_heading(item, value);
+        } else if(lv_streq("icon", name)) {
+            ha_heading_card_set_icon(item, value);
+        }
     }
 }
 

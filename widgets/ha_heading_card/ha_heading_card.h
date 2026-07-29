@@ -27,6 +27,7 @@ extern "C" {
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
+int32_t clamp_i32(int32_t value, int32_t min, int32_t max);
 void refresh(lv_obj_t *obj);
 
 /**********************

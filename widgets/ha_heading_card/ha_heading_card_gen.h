@@ -42,6 +42,26 @@ extern "C" {
  * @return pointer to the created ha_heading_card
  */
 lv_obj_t * ha_heading_card_create(lv_obj_t * parent);
+/**
+ * ha_heading_card heading
+ * @param obj   pointer to a ha_heading_card
+ * @param heading  heading
+ */
+void ha_heading_card_set_heading(lv_obj_t * ha_heading_card, const char * heading);
+
+/**
+ * ha_heading_card icon
+ * @param obj   pointer to a ha_heading_card
+ * @param icon  icon
+ */
+void ha_heading_card_set_icon(lv_obj_t * ha_heading_card, const char * icon);
+
+/**
+ * ha_heading_card actionable
+ * @param obj   pointer to a ha_heading_card
+ * @param actionable  actionable
+ */
+void ha_heading_card_set_actionable(lv_obj_t * ha_heading_card, bool actionable);
 
 /**********************
  *      MACROS

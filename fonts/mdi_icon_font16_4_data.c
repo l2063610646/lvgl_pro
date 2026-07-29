@@ -1,7 +1,7 @@
 /*******************************************************************************
  * Size: 16 px
  * Bpp: 4
- * Opts: --font /fonts/materialdesignicons-webfont.ttf -o /fonts/mdi_icon_font16_4_data.c --size 16 --bpp 4 --format lvgl --no-compress --range 0xF02DC,0xF0415,0xF0374
+ * Opts: --font /fonts/materialdesignicons-webfont.ttf -o /fonts/mdi_icon_font16_4_data.c --size 16 --bpp 4 --format lvgl --no-compress --range 0xF02DC,0xF0415,0xF0374,0xF0142
  ******************************************************************************/
 
 #ifdef __has_include
@@ -32,6 +32,11 @@
 
 /*Store the image of the glyphs*/
 static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
+    /* U+F0142 "󰅂" */
+    0x0b, 0x30, 0x00, 0x0b, 0xf3, 0x00, 0x00, 0xbf,
+    0x30, 0x00, 0x0b, 0xf3, 0x00, 0x0b, 0xf3, 0x00,
+    0xbf, 0x30, 0x0b, 0xf3, 0x00, 0x0b, 0x30, 0x00,
+
     /* U+F02DC "󰋜" */
     0x00, 0x00, 0x00, 0xb5, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x1c, 0xff, 0x60, 0x00, 0x00, 0x00, 0x02,
@@ -65,9 +70,10 @@ static LV_ATTRIBUTE_LARGE_CONST const uint8_t glyph_bitmap[] = {
 
 static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
     {.bitmap_index = 0, .adv_w = 0, .box_w = 0, .box_h = 0, .ofs_x = 0, .ofs_y = 0} /* id = 0 reserved */,
-    {.bitmap_index = 0, .adv_w = 256, .box_w = 14, .box_h = 12, .ofs_x = 1, .ofs_y = 0},
-    {.bitmap_index = 84, .adv_w = 256, .box_w = 10, .box_h = 2, .ofs_x = 3, .ofs_y = 5},
-    {.bitmap_index = 94, .adv_w = 256, .box_w = 10, .box_h = 10, .ofs_x = 3, .ofs_y = 1}
+    {.bitmap_index = 0, .adv_w = 256, .box_w = 6, .box_h = 8, .ofs_x = 5, .ofs_y = 2},
+    {.bitmap_index = 24, .adv_w = 256, .box_w = 14, .box_h = 12, .ofs_x = 1, .ofs_y = 0},
+    {.bitmap_index = 108, .adv_w = 256, .box_w = 10, .box_h = 2, .ofs_x = 3, .ofs_y = 5},
+    {.bitmap_index = 118, .adv_w = 256, .box_w = 10, .box_h = 10, .ofs_x = 3, .ofs_y = 1}
 };
 
 /*---------------------
@@ -75,15 +81,15 @@ static const lv_font_fmt_txt_glyph_dsc_t glyph_dsc[] = {
  *--------------------*/
 
 static const uint16_t unicode_list_0[] = {
-    0x00, 0x98, 0x139
+    0x00, 0x19a, 0x232, 0x2d3
 };
 
 /*Collect the unicode lists and glyph_id offsets*/
 static const lv_font_fmt_txt_cmap_t cmaps[] =
 {
     {
-        .range_start = 983772, .range_length = 314, .glyph_id_start = 1,
-        .unicode_list = unicode_list_0, .glyph_id_ofs_list = NULL, .list_length = 3, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
+        .range_start = 983362, .range_length = 724, .glyph_id_start = 1,
+        .unicode_list = unicode_list_0, .glyph_id_ofs_list = NULL, .list_length = 4, .type = LV_FONT_FMT_TXT_CMAP_SPARSE_TINY
     }
 };
 

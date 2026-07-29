@@ -27,7 +27,7 @@
 			src_path="fonts/materialdesignicons-webfont.ttf"
 			bpp="4"
 			size="24"
-			range="0xF02DC,0xF0415,0xF0374"
+			range="0xF02DC,0xF0415,0xF0374,0xF0142"
 		/>
 		<bin
 			name="mdi_icon_font16_4"
@@ -35,7 +35,7 @@
 			src_path="fonts/materialdesignicons-webfont.ttf"
 			bpp="4"
 			size="16"
-			range="0xF02DC,0xF0415,0xF0374"
+			range="0xF02DC,0xF0415,0xF0374,0xF0142"
 		/>
 		<bin
 			name="mdi_icon_font18_4"
@@ -43,7 +43,7 @@
 			src_path="fonts/materialdesignicons-webfont.ttf"
 			bpp="4"
 			size="18"
-			range="0xF02DC,0xF0415,0xF0374"
+			range="0xF02DC,0xF0415,0xF0374,0xF0142"
 		/>
 		<bin name="roboto_regular_12_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="12" />
 		<bin name="roboto_regular_14_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="14" />

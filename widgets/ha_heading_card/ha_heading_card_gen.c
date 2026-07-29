@@ -110,7 +110,7 @@ static void ha_heading_card_constructor(const lv_obj_class_t * class_p, lv_obj_t
         widget->main = main;
         lv_obj_t * title_ctn = lv_obj_create(main);
         lv_obj_set_name(title_ctn, "title_ctn");
-        lv_obj_set_width(title_ctn, 100);
+        lv_obj_set_width(title_ctn, LV_SIZE_CONTENT);
         lv_obj_set_height(title_ctn, LV_SIZE_CONTENT);
         lv_obj_set_flag(title_ctn, LV_OBJ_FLAG_SCROLLABLE, false);
         lv_obj_set_style_pad_all(title_ctn, 0, 0);
@@ -122,7 +122,7 @@ static void ha_heading_card_constructor(const lv_obj_class_t * class_p, lv_obj_t
         lv_obj_set_style_layout(title_row, LV_LAYOUT_FLEX, 0);
         lv_obj_set_flex_flow(title_row, LV_FLEX_FLOW_ROW);
         lv_obj_set_flag(title_row, LV_OBJ_FLAG_SCROLLABLE, false);
-        lv_obj_set_width(title_row, lv_pct(100));
+        lv_obj_set_width(title_row, LV_SIZE_CONTENT);
         lv_obj_set_height(title_row, LV_SIZE_CONTENT);
         lv_obj_set_style_clip_corner(title_row, true, 0);
         lv_obj_set_style_bg_opa(title_row, 0, 0);
@@ -141,13 +141,21 @@ static void ha_heading_card_constructor(const lv_obj_class_t * class_p, lv_obj_t
 
         lv_obj_t * title_label = lv_label_create(title_row);
         lv_obj_set_name(title_label, "title_label");
-        lv_label_set_text(title_label, "Helloaaaaaaaaaaaaaaaaaaaa");
+        lv_label_set_text(title_label, "aaaaaaaaaaaaaaaaaaaaaaaa");
         lv_obj_set_style_text_font(title_label, roboto_regular_14_4, 0);
         widget->title_label = title_label;
 
+        lv_obj_t * title_next = lv_label_create(title_row);
+        lv_obj_set_name(title_next, "title_next");
+        lv_label_set_text(title_next, "󰅂");
+        lv_obj_set_style_text_font(title_next, mdi_icon_font18_4, 0);
+        lv_obj_set_style_pad_left(title_next, -5, 0);
+        lv_obj_set_width(title_next, 12);
+        widget->title_next = title_next;
+
         lv_obj_t * badges_ctn = lv_obj_create(main);
         lv_obj_set_name(badges_ctn, "badges_ctn");
-        lv_obj_set_width(badges_ctn, 200);
+        lv_obj_set_width(badges_ctn, LV_SIZE_CONTENT);
         lv_obj_set_height(badges_ctn, LV_SIZE_CONTENT);
         lv_obj_set_style_bg_opa(badges_ctn, 0, 0);
         lv_obj_set_style_pad_all(badges_ctn, 0, 0);
@@ -180,24 +188,6 @@ static void ha_heading_card_constructor(const lv_obj_class_t * class_p, lv_obj_t
         hui_heading_badge_set_icon(hui_heading_badge_1, "󰋜");
         hui_heading_badge_set_text(hui_heading_badge_1, "World");
         widget->hui_heading_badge_1 = hui_heading_badge_1;
-
-        lv_obj_t * hui_heading_badge_2 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_2, HUI_HEADING_BADGE_TYPE_DEF_BUTTON);
-        hui_heading_badge_set_icon(hui_heading_badge_2, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_2, "AAAA");
-        widget->hui_heading_badge_2 = hui_heading_badge_2;
-
-        lv_obj_t * hui_heading_badge_3 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_3, HUI_HEADING_BADGE_TYPE_DEF_BUTTON);
-        hui_heading_badge_set_icon(hui_heading_badge_3, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_3, "AAAA");
-        widget->hui_heading_badge_3 = hui_heading_badge_3;
-
-        lv_obj_t * hui_heading_badge_4 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_4, HUI_HEADING_BADGE_TYPE_DEF_BUTTON);
-        hui_heading_badge_set_icon(hui_heading_badge_4, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_4, "AAAA");
-        widget->hui_heading_badge_4 = hui_heading_badge_4;
 
         the_root = obj;
     }

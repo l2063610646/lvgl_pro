@@ -7,6 +7,9 @@
 		<!-- Add your API here. For example 
 		<prop name="prop1" type="int" default="0" help="What is this property?"/>
 		-->
+		<prop name="heading" type="string" />
+		<prop name="icon" type="string" />
+		<prop name="actionable" type="bool" />
 	</api>
 
 	<styles />
@@ -35,7 +38,7 @@
 		>
 			<lv_obj
 				name="title_ctn"
-				width="100"
+				width="content"
 				height="content"
 				scrollable="false"
 				style_pad_all="0"
@@ -47,7 +50,7 @@
 					style_layout="flex"
 					flex_flow="row"
 					scrollable="false"
-					width="100%"
+					width="content"
 					height="content"
 					style_clip_corner="true"
 					style_bg_opa="0"
@@ -61,14 +64,21 @@
 					<lv_label name="title_icon" text="&#xF02DC;" style_text_font="mdi_icon_font18_4" />
 					<lv_label
 						name="title_label"
-						text="Helloaaaaaaaaaaaaaaaaaaaa"
+						text="aaaaaaaaaaaaaaaaaaaaaaaa"
 						style_text_font="roboto_regular_14_4"
+					/>
+					<lv_label
+						name="title_next"
+						text="&#xF0142;"
+						style_text_font="mdi_icon_font18_4"
+						style_pad_left="-5"
+						width="12"
 					/>
 				</lv_obj>
 			</lv_obj>
 			<lv_obj
 				name="badges_ctn"
-				width="200"
+				width="content"
 				height="content"
 				style_bg_opa="0"
 				style_pad_all="0"
@@ -92,9 +102,6 @@
 				>
 					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="Hello" />
 					<hui_heading_badge h_type="TEXT" icon="&#xF02DC;" text="World" />
-					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="AAAA" />
-					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="AAAA" />
-					<hui_heading_badge h_type="BUTTON" icon="&#xF02DC;" text="AAAA" />
 				</lv_obj>
 			</lv_obj>
 		</lv_obj>

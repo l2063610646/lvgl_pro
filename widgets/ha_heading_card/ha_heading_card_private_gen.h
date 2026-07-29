@@ -34,18 +34,19 @@ extern "C" {
  **********************/
 typedef struct {
     lv_obj_t obj;  /* Base widget to extend */
+    const char * heading;
+    const char * icon;
+    bool actionable;
     lv_obj_t * main;
     lv_obj_t * title_ctn;
     lv_obj_t * title_row;
     lv_obj_t * title_icon;
     lv_obj_t * title_label;
+    lv_obj_t * title_next;
     lv_obj_t * badges_ctn;
     lv_obj_t * badges_row;
     lv_obj_t * hui_heading_badge_0;
     lv_obj_t * hui_heading_badge_1;
-    lv_obj_t * hui_heading_badge_2;
-    lv_obj_t * hui_heading_badge_3;
-    lv_obj_t * hui_heading_badge_4;
     HA_HEADING_CARD_USER_DATA
 } ha_heading_card_t;
 
