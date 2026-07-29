@@ -1,4 +1,6 @@
+preview-bin
 preview-build
 build
+cmake-build-debug
 .cache.json
-
+.idea
