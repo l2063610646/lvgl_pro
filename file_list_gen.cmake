@@ -16,4 +16,7 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_ripple/ha_ripple.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_badge/hui_heading_badge_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_badge/hui_heading_badge_xml_parser.c
-  ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_badge/hui_heading_badge.c)
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_badge/hui_heading_badge.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_card/hui_heading_card_gen.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_card/hui_heading_card_xml_parser.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_card/hui_heading_card.c)
