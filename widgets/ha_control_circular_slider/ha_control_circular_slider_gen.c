@@ -131,7 +131,6 @@ static void ha_control_circular_slider_constructor(const lv_obj_class_t * class_
         lv_style_init(&touch_arc_indicator);
 
         lv_style_set_bg_opa(&style_base, (255 * 0 / 100));
-        lv_style_set_bg_color(&style_base, lv_color_hex(0x6080e0));
         lv_style_set_arc_opa(&low_arc_main, (255 * 0 / 100));
         lv_style_set_arc_color(&low_arc_indicator, lv_color_hex(0xffb790));
         lv_style_set_arc_opa(&low_arc_indicator, (255 * 100 / 100));
@@ -149,16 +148,13 @@ static void ha_control_circular_slider_constructor(const lv_obj_class_t * class_
         lv_style_set_arc_opa(&high_active_arc_indicator, (255 * 100 / 100));
         lv_style_set_opa(&high_active_arc_knob, (255 * 0 / 100));
         lv_style_set_opa(&bg_arc_knob, (255 * 0 / 100));
-        lv_style_set_bg_color(&bg_arc_knob, lv_color_hex(0xffffff));
-        lv_style_set_pad_all(&bg_arc_knob, -2);
-        lv_style_set_arc_opa(&bg_arc_main, (255 * 100 / 100));
-        lv_style_set_bg_color(&bg_arc_main, lv_color_hex(0xebebeb));
-        lv_style_set_arc_color(&bg_arc_indicator, lv_color_hex(0x00FF00));
+        lv_style_set_arc_color(&bg_arc_main, lv_color_hex(0xe0e0e0));
+        lv_style_set_arc_opa(&bg_arc_main, (255 * 30 / 100));
         lv_style_set_arc_opa(&bg_arc_indicator, (255 * 0 / 100));
         lv_style_set_arc_opa(&dot_arc_main, (255 * 0 / 100));
         lv_style_set_arc_opa(&dot_arc_indicator, (255 * 0 / 100));
-        lv_style_set_opa(&cur_dot_arc_knob, (255 * 100 / 100));
-        lv_style_set_bg_color(&cur_dot_arc_knob, lv_color_hex(0x7f7f7f));
+        lv_style_set_opa(&cur_dot_arc_knob, (255 * 50 / 100));
+        lv_style_set_bg_color(&cur_dot_arc_knob, lv_color_hex(0x212121));
         lv_style_set_pad_all(&cur_dot_arc_knob, -2);
         lv_style_set_opa(&low_dot_arc_knob, (255 * 100 / 100));
         lv_style_set_bg_color(&low_dot_arc_knob, lv_color_hex(0xFFFFFF));
@@ -167,11 +163,7 @@ static void ha_control_circular_slider_constructor(const lv_obj_class_t * class_
         lv_style_set_bg_color(&high_dot_arc_knob, lv_color_hex(0xFFFFFF));
         lv_style_set_pad_all(&high_dot_arc_knob, -2);
         lv_style_set_opa(&touch_arc_knob, (255 * 0 / 100));
-        lv_style_set_bg_color(&touch_arc_knob, lv_color_hex(0xffffff));
-        lv_style_set_pad_all(&touch_arc_knob, -2);
         lv_style_set_arc_opa(&touch_arc_main, (255 * 0 / 100));
-        lv_style_set_bg_color(&touch_arc_main, lv_color_hex(0xebebeb));
-        lv_style_set_arc_color(&touch_arc_indicator, lv_color_hex(0x00FF00));
         lv_style_set_arc_opa(&touch_arc_indicator, (255 * 0 / 100));
 
         style_inited = true;

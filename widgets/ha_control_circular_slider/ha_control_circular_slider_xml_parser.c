@@ -64,9 +64,8 @@ void ha_control_circular_slider_xml_apply(lv_xml_parser_state_t * state, const c
 
     lv_xml_obj_apply(state, attrs);
 
-    ha_control_circular_slider_set_cur_value(item, 40);
-    ha_control_circular_slider_set_low_knob_value(item, 0);
-    ha_control_circular_slider_set_high_knob_value(item, 100);
+    ha_control_circular_slider_set_current(item, 40);
+    ha_control_circular_slider_set_value(item, 50);
     ha_control_circular_slider_set_low(item, 20);
     ha_control_circular_slider_set_high(item, 80);
     ha_control_circular_slider_set_dual(item, false);
@@ -74,28 +73,20 @@ void ha_control_circular_slider_xml_apply(lv_xml_parser_state_t * state, const c
     ha_control_circular_slider_set_max(item, 100);
     ha_control_circular_slider_set_step(item, 1);
     ha_control_circular_slider_set_size(item, 320);
-    ha_control_circular_slider_set_updating_low(item, false);
-    ha_control_circular_slider_set_updating_high(item, false);
 
     for(int i = 0; attrs[i]; i += 2) {
         const char * name = attrs[i];
         const char * value = attrs[i + 1];
-        if(lv_streq("cur_value", name)) {
-            ha_control_circular_slider_set_cur_value(item, lv_xml_atoi(value));
-        } else if(lv_streq("low_knob_value", name)) {
-            ha_control_circular_slider_set_low_knob_value(item, lv_xml_atoi(value));
-        } else if(lv_streq("high_knob_value", name)) {
-            ha_control_circular_slider_set_high_knob_value(item, lv_xml_atoi(value));
+        if(lv_streq("current", name)) {
+            ha_control_circular_slider_set_current(item, lv_xml_atoi(value));
+        } else if(lv_streq("value", name)) {
+            ha_control_circular_slider_set_value(item, lv_xml_atoi(value));
         } else if(lv_streq("low", name)) {
             ha_control_circular_slider_set_low(item, lv_xml_atoi(value));
         } else if(lv_streq("high", name)) {
             ha_control_circular_slider_set_high(item, lv_xml_atoi(value));
         } else if(lv_streq("dual", name)) {
             ha_control_circular_slider_set_dual(item, lv_streq(value, "true") || lv_streq(value, "1"));
-        } else if(lv_streq("updating_low", name)) {
-            ha_control_circular_slider_set_updating_low(item, lv_streq(value, "true") || lv_streq(value, "1"));
-        } else if(lv_streq("updating_high", name)) {
-            ha_control_circular_slider_set_updating_high(item, lv_streq(value, "true") || lv_streq(value, "1"));
         } else if(lv_streq("min", name)) {
             ha_control_circular_slider_set_min(item, lv_xml_atoi(value));
         } else if(lv_streq("max", name)) {

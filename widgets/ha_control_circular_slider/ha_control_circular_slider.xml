@@ -4,9 +4,8 @@
 	</previews>
 
 	<api>
-		<prop name="cur_value" type="int" default="40" />
-		<prop name="low_knob_value" type="int" default="0" />
-		<prop name="high_knob_value" type="int" default="100" />
+		<prop name="current" type="int" default="40" />
+		<prop name="value" type="int" default="50" />
 		<prop name="low" type="int" default="20" />
 		<prop name="high" type="int" default="80" />
 		<prop name="dual" type="bool" default="false" />
@@ -14,12 +13,10 @@
 		<prop name="max" type="int" default="100" />
 		<prop name="step" type="int" default="1" />
 		<prop name="size" type="int" default="320" />
-		<prop name="updating_low" type="bool" default="false" />
-		<prop name="updating_high" type="bool" default="false" />
 	</api>
 
 	<styles>
-		<style name="style_base" bg_opa="0%" bg_color="0x6080e0" />
+		<style name="style_base" bg_opa="0%" />
 		<style name="low_arc_main" arc_opa="0%" />
 		<style name="low_arc_indicator" arc_color="0xffb790" arc_opa="100%" />
 		<style name="low_arc_knob" opa="0%" />
@@ -32,17 +29,17 @@
 		<style name="high_active_arc_main" arc_opa="0%" />
 		<style name="high_active_arc_indicator" arc_color="0x2196f3" arc_opa="100%" />
 		<style name="high_active_arc_knob" opa="0%" />
-		<style name="bg_arc_knob" opa="0%" bg_color="0xffffff" pad_all="-2" />
-		<style name="bg_arc_main" arc_opa="100%" bg_color="0xebebeb" />
-		<style name="bg_arc_indicator" arc_color="0x00FF00" arc_opa="0%" />
+		<style name="bg_arc_knob" opa="0%" />
+		<style name="bg_arc_main" arc_color="0xe0e0e0" arc_opa="30%" />
+		<style name="bg_arc_indicator" arc_opa="0%" />
 		<style name="dot_arc_main" arc_opa="0%" />
 		<style name="dot_arc_indicator" arc_opa="0%" />
-		<style name="cur_dot_arc_knob" opa="100%" bg_color="0x7f7f7f" pad_all="-2" />
+		<style name="cur_dot_arc_knob" opa="50%" bg_color="0x212121" pad_all="-2" />
 		<style name="low_dot_arc_knob" opa="100%" bg_color="0xFFFFFF" pad_all="-2" />
 		<style name="high_dot_arc_knob" opa="100%" bg_color="0xFFFFFF" pad_all="-2" />
-		<style name="touch_arc_knob" opa="0%" bg_color="0xffffff" pad_all="-2" />
-		<style name="touch_arc_main" arc_opa="0%" bg_color="0xebebeb" />
-		<style name="touch_arc_indicator" arc_color="0x00FF00" arc_opa="0%" />
+		<style name="touch_arc_knob" opa="0%" />
+		<style name="touch_arc_main" arc_opa="0%" />
+		<style name="touch_arc_indicator" arc_opa="0%" />
 	</styles>
 
 	<view extends="lv_obj">

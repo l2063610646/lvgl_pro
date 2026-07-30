@@ -34,9 +34,8 @@ extern "C" {
  **********************/
 typedef struct {
     lv_obj_t obj;  /* Base widget to extend */
-    int32_t cur_value;
-    int32_t low_knob_value;
-    int32_t high_knob_value;
+    int32_t current;
+    int32_t value;
     int32_t low;
     int32_t high;
     bool dual;
@@ -44,8 +43,6 @@ typedef struct {
     int32_t max;
     int32_t step;
     int32_t size;
-    bool updating_low;
-    bool updating_high;
     lv_obj_t * bg_arc;
     lv_obj_t * low_arc;
     lv_obj_t * low_active_arc;

@@ -3,37 +3,18 @@
 		<!-- Add your code here -->
 		<!-- <lv_label text="&#xF02DC;" style_text_font="mdi_icon_font24_4" /> -->
 
-		<lv_obj name="col" flex_flow="column" style_layout="flex" align="center" width="content" height="content">
-			<lv_obj name="test" style_layout="flex" flex_flow="row" align="center" width="content" height="content">
-				<lv_obj hidden="true" />
-				<lv_label text="VV" />
-			</lv_obj>
-			<lv_obj width="300" style_pad_all="0" style_layout="flex" flex_flow="column">
+		<lv_obj name="col" flex_flow="column" style_layout="flex" align="top_mid" width="content" height="content">
+			<!-- <lv_obj name="test" style_layout="flex" flex_flow="row" align="top_mid" width="content" height="content" /> -->
+			<lv_obj width="300" height="content" style_pad_all="0" style_layout="flex" flex_flow="column">
 				<hui_heading_card heading="012345678901234012345671128123123" />
 				<hui_heading_card heading="01234567890">
 					<hui_heading_card-badge h_type="BUTTON" icon="&#xF02DC;" text="BBB" />
 					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="BBB" />
 				</hui_heading_card>
-				<hui_heading_card heading="01234567890" actionable="true">
-					<hui_heading_card-badge h_type="BUTTON" icon="&#xF02DC;" text="AAA" />
-					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="BBB" />
-					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="CCC" />
-					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="DDD" />
-				</hui_heading_card>
-				<hui_heading_card heading="012345678901234012345671128123123" actionable="true" />
-				<hui_heading_card heading="01234567890" actionable="true" />
-				<hui_heading_card heading="01234" actionable="true" />
 			</lv_obj>
 
-			<hui_heading_card width="300" heading="01234" />
-			<hui_heading_card width="400" heading="01234" />
-			<hui_heading_card width="500" heading="01234" />
-			<hui_heading_card width="600" heading="01234" actionable="true">
-				<hui_heading_card-badge h_type="BUTTON" icon="&#xF02DC;" text="BBB" />
-				<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="BBB" />
-			</hui_heading_card>
-			<ha_control_circular_slider />
-			<ha_control_circular_slider dual="true" size="200" />
+			<ha_control_circular_slider value="10" size="200" current="20" low="15" high="30" min="10" max="30" />
+			<ha_control_circular_slider dual="true" size="200" min="0" max="1000" low="0" high="1000" current="555" />
 		</lv_obj>
 	</view>
 </screen>

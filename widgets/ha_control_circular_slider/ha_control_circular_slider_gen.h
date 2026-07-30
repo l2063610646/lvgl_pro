@@ -43,25 +43,18 @@ extern "C" {
  */
 lv_obj_t * ha_control_circular_slider_create(lv_obj_t * parent);
 /**
- * ha_control_circular_slider cur_value
+ * ha_control_circular_slider current
  * @param obj   pointer to a ha_control_circular_slider
- * @param cur_value  cur_value
+ * @param current  current
  */
-void ha_control_circular_slider_set_cur_value(lv_obj_t * ha_control_circular_slider, int32_t cur_value);
+void ha_control_circular_slider_set_current(lv_obj_t * ha_control_circular_slider, int32_t current);
 
 /**
- * ha_control_circular_slider low_knob_value
+ * ha_control_circular_slider value
  * @param obj   pointer to a ha_control_circular_slider
- * @param low_knob_value  low_knob_value
+ * @param value  value
  */
-void ha_control_circular_slider_set_low_knob_value(lv_obj_t * ha_control_circular_slider, int32_t low_knob_value);
-
-/**
- * ha_control_circular_slider high_knob_value
- * @param obj   pointer to a ha_control_circular_slider
- * @param high_knob_value  high_knob_value
- */
-void ha_control_circular_slider_set_high_knob_value(lv_obj_t * ha_control_circular_slider, int32_t high_knob_value);
+void ha_control_circular_slider_set_value(lv_obj_t * ha_control_circular_slider, int32_t value);
 
 /**
  * ha_control_circular_slider low
@@ -111,20 +104,6 @@ void ha_control_circular_slider_set_step(lv_obj_t * ha_control_circular_slider, 
  * @param size  size
  */
 void ha_control_circular_slider_set_size(lv_obj_t * ha_control_circular_slider, int32_t size);
-
-/**
- * ha_control_circular_slider updating_low
- * @param obj   pointer to a ha_control_circular_slider
- * @param updating_low  updating_low
- */
-void ha_control_circular_slider_set_updating_low(lv_obj_t * ha_control_circular_slider, bool updating_low);
-
-/**
- * ha_control_circular_slider updating_high
- * @param obj   pointer to a ha_control_circular_slider
- * @param updating_high  updating_high
- */
-void ha_control_circular_slider_set_updating_high(lv_obj_t * ha_control_circular_slider, bool updating_high);
 
 /**********************
  *      MACROS
