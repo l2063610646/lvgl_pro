@@ -78,9 +78,39 @@ void hui_heading_card_xml_apply(lv_xml_parser_state_t * state, const char ** att
     }
 }
 
+void hui_heading_card_badge_xml_apply(lv_xml_parser_state_t * state, const char ** attrs)
+{
+    void * item = lv_xml_state_get_item(state);
+    lv_xml_obj_apply(state, attrs);
+}
+
+void * hui_heading_card_badge_xml_create(lv_xml_parser_state_t * state, const char ** attrs)
+{
+    lv_obj_t * parent = lv_xml_state_get_parent(state);
+    const char * h_type = NULL;
+    const char * icon = NULL;
+    const char * text = NULL;
+
+    for(int i = 0; attrs[i]; i += 2) {
+        const char * name = attrs[i];
+        const char * value = attrs[i + 1];
+        if(lv_streq("h_type", name)) {
+            h_type = value;
+        } else if(lv_streq("icon", name)) {
+            icon = value;
+        } else if(lv_streq("text", name)) {
+            text = value;
+        }
+    }
+
+    void * item = hui_heading_card_add_badge(parent, h_type, icon, text);
+    return item;
+}
+
 void hui_heading_card_register(void)
 {
     lv_xml_register_widget("hui_heading_card", hui_heading_card_xml_create, hui_heading_card_xml_apply);
+    lv_xml_register_widget("hui_heading_card-badge", hui_heading_card_badge_xml_create, hui_heading_card_badge_xml_apply);
 }
 
 /**********************

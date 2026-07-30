@@ -67,6 +67,45 @@ lv_obj_t * home_create(void)
         lv_obj_set_style_pad_all(lv_obj_2, 0, 0);
         lv_obj_set_style_layout(lv_obj_2, LV_LAYOUT_FLEX, 0);
         lv_obj_set_flex_flow(lv_obj_2, LV_FLEX_FLOW_COLUMN);
+        lv_obj_t * hui_heading_card_0 = hui_heading_card_create(lv_obj_2);
+        hui_heading_card_set_heading(hui_heading_card_0, "012345678901234012345671128123123");
+
+        lv_obj_t * hui_heading_card_1 = hui_heading_card_create(lv_obj_2);
+        hui_heading_card_set_heading(hui_heading_card_1, "01234567890");
+
+        lv_obj_t * hui_heading_card_2 = hui_heading_card_create(lv_obj_2);
+        hui_heading_card_set_heading(hui_heading_card_2, "01234");
+
+        lv_obj_t * hui_heading_card_3 = hui_heading_card_create(lv_obj_2);
+        hui_heading_card_set_heading(hui_heading_card_3, "012345678901234012345671128123123");
+        hui_heading_card_set_actionable(hui_heading_card_3, true);
+
+        lv_obj_t * hui_heading_card_4 = hui_heading_card_create(lv_obj_2);
+        hui_heading_card_set_heading(hui_heading_card_4, "01234567890");
+        hui_heading_card_set_actionable(hui_heading_card_4, true);
+
+        lv_obj_t * hui_heading_card_5 = hui_heading_card_create(lv_obj_2);
+        hui_heading_card_set_heading(hui_heading_card_5, "01234");
+        hui_heading_card_set_actionable(hui_heading_card_5, true);
+
+        lv_obj_t * hui_heading_card_6 = hui_heading_card_create(col);
+        lv_obj_set_width(hui_heading_card_6, 300);
+        hui_heading_card_set_heading(hui_heading_card_6, "01234");
+
+        lv_obj_t * hui_heading_card_7 = hui_heading_card_create(col);
+        lv_obj_set_width(hui_heading_card_7, 400);
+        hui_heading_card_set_heading(hui_heading_card_7, "01234");
+
+        lv_obj_t * hui_heading_card_8 = hui_heading_card_create(col);
+        lv_obj_set_width(hui_heading_card_8, 500);
+        hui_heading_card_set_heading(hui_heading_card_8, "01234");
+
+        lv_obj_t * hui_heading_card_9 = hui_heading_card_create(col);
+        lv_obj_set_width(hui_heading_card_9, 600);
+        hui_heading_card_set_heading(hui_heading_card_9, "01234");
+        hui_heading_card_set_actionable(hui_heading_card_9, true);
+        lv_obj_t * hui_heading_card_badge_0 = hui_heading_card_add_badge(hui_heading_card_9, "BUTTON", "󰋜", "BBB");
+        lv_obj_t * hui_heading_card_badge_1 = hui_heading_card_add_badge(hui_heading_card_9, "TEXT", "󰋜", "BBB");
 
         the_root = lv_obj_0;
     }

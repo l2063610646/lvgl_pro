@@ -145,6 +145,30 @@ void hui_heading_card_set_actionable(lv_obj_t * obj, bool actionable)
     refresh(obj);
 }
 
+lv_obj_t * hui_heading_card_add_badge(lv_obj_t * obj, const char * h_type, const char * icon, const char * text)
+{
+    hui_heading_card_t * root = (hui_heading_card_t *) obj;
+    lv_obj_t * badge = hui_heading_badge_create(root->badges_row);
+
+    hui_heading_badge_type_def_t type_val = HUI_HEADING_BADGE_TYPE_DEF_TEXT;
+    if(h_type) {
+        if(lv_streq(h_type, "BUTTON") || lv_streq(h_type, "1")) {
+            type_val = HUI_HEADING_BADGE_TYPE_DEF_BUTTON;
+        }
+    }
+    hui_heading_badge_set_h_type(badge, type_val);
+
+    if(icon) {
+        hui_heading_badge_set_icon(badge, icon);
+    }
+    if(text) {
+        hui_heading_badge_set_text(badge, text);
+    }
+
+    refresh(obj);
+    return badge;
+}
+
 /**********************
  *   STATIC FUNCTIONS
  **********************/

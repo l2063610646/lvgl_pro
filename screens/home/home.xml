@@ -10,8 +10,16 @@
 			</lv_obj>
 			<lv_obj width="300" style_pad_all="0" style_layout="flex" flex_flow="column">
 				<hui_heading_card heading="012345678901234012345671128123123" />
-				<hui_heading_card heading="01234567890" />
-				<hui_heading_card heading="01234" />
+				<hui_heading_card heading="01234567890">
+					<hui_heading_card-badge h_type="BUTTON" icon="&#xF02DC;" text="BBB" />
+					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="BBB" />
+				</hui_heading_card>
+				<hui_heading_card heading="01234567890" actionable="true">
+					<hui_heading_card-badge h_type="BUTTON" icon="&#xF02DC;" text="AAA" />
+					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="BBB" />
+					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="CCC" />
+					<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="DDD" />
+				</hui_heading_card>
 				<hui_heading_card heading="012345678901234012345671128123123" actionable="true" />
 				<hui_heading_card heading="01234567890" actionable="true" />
 				<hui_heading_card heading="01234" actionable="true" />
@@ -20,7 +28,10 @@
 			<hui_heading_card width="300" heading="01234" />
 			<hui_heading_card width="400" heading="01234" />
 			<hui_heading_card width="500" heading="01234" />
-			<hui_heading_card width="600" heading="01234" actionable="true" />
+			<hui_heading_card width="600" heading="01234" actionable="true">
+				<hui_heading_card-badge h_type="BUTTON" icon="&#xF02DC;" text="BBB" />
+				<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="BBB" />
+			</hui_heading_card>
 		</lv_obj>
 	</view>
 </screen>

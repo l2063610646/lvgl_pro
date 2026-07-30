@@ -177,35 +177,6 @@ static void hui_heading_card_constructor(const lv_obj_class_t * class_p, lv_obj_
         lv_obj_set_style_border_width(badges_row, 0, 0);
         lv_obj_set_style_bg_opa(badges_row, 0, 0);
         widget->badges_row = badges_row;
-        lv_obj_t * hui_heading_badge_0 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_0, HUI_HEADING_BADGE_TYPE_DEF_BUTTON);
-        hui_heading_badge_set_icon(hui_heading_badge_0, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_0, "Hello");
-        widget->hui_heading_badge_0 = hui_heading_badge_0;
-
-        lv_obj_t * hui_heading_badge_1 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_1, HUI_HEADING_BADGE_TYPE_DEF_TEXT);
-        hui_heading_badge_set_icon(hui_heading_badge_1, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_1, "World");
-        widget->hui_heading_badge_1 = hui_heading_badge_1;
-
-        lv_obj_t * hui_heading_badge_2 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_2, HUI_HEADING_BADGE_TYPE_DEF_TEXT);
-        hui_heading_badge_set_icon(hui_heading_badge_2, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_2, "World");
-        widget->hui_heading_badge_2 = hui_heading_badge_2;
-
-        lv_obj_t * hui_heading_badge_3 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_3, HUI_HEADING_BADGE_TYPE_DEF_TEXT);
-        hui_heading_badge_set_icon(hui_heading_badge_3, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_3, "World");
-        widget->hui_heading_badge_3 = hui_heading_badge_3;
-
-        lv_obj_t * hui_heading_badge_4 = hui_heading_badge_create(badges_row);
-        hui_heading_badge_set_h_type(hui_heading_badge_4, HUI_HEADING_BADGE_TYPE_DEF_TEXT);
-        hui_heading_badge_set_icon(hui_heading_badge_4, "󰋜");
-        hui_heading_badge_set_text(hui_heading_badge_4, "World");
-        widget->hui_heading_badge_4 = hui_heading_badge_4;
 
         the_root = obj;
     }

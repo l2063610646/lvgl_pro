@@ -63,6 +63,15 @@ void hui_heading_card_set_icon(lv_obj_t * hui_heading_card, const char * icon);
  */
 void hui_heading_card_set_actionable(lv_obj_t * hui_heading_card, bool actionable);
 
+/**
+ * hui_heading_card badge
+ * @param obj   pointer to a hui_heading_card
+ * @param h_type  h_type
+ * @param icon  icon
+ * @param text  text
+ */
+lv_obj_t * hui_heading_card_add_badge(lv_obj_t * hui_heading_card, const char * h_type, const char * icon, const char * text);
+
 /**********************
  *      MACROS
  **********************/

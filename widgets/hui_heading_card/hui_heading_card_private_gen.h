@@ -45,11 +45,6 @@ typedef struct {
     lv_obj_t * title_next;
     lv_obj_t * badges_ctn;
     lv_obj_t * badges_row;
-    lv_obj_t * hui_heading_badge_0;
-    lv_obj_t * hui_heading_badge_1;
-    lv_obj_t * hui_heading_badge_2;
-    lv_obj_t * hui_heading_badge_3;
-    lv_obj_t * hui_heading_badge_4;
     HUI_HEADING_CARD_USER_DATA
 } hui_heading_card_t;
 
