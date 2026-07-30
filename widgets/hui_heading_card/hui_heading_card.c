@@ -21,26 +21,14 @@
 /**********************
  *  STATIC PROTOTYPES
  **********************/
-
-/**********************
- *  STATIC VARIABLES
- **********************/
-
-/**********************
- *      MACROS
- **********************/
-
-/**********************
- *   GLOBAL FUNCTIONS
- **********************/
-int32_t clamp_i32(int32_t value, int32_t min, int32_t max)
+static int32_t clamp_i32(int32_t value, int32_t min, int32_t max)
 {
     if(value < min) return min;
     if(value > max) return max;
     return value;
 }
 
-void refresh(lv_obj_t *obj)
+static void refresh(lv_obj_t *obj)
 {
     hui_heading_card_t *root = (hui_heading_card_t *) obj;
 
@@ -106,6 +94,18 @@ void refresh(lv_obj_t *obj)
     lv_obj_update_layout(root->badges_ctn);
     lv_obj_update_layout(root->main);
 }
+
+/**********************
+ *  STATIC VARIABLES
+ **********************/
+
+/**********************
+ *      MACROS
+ **********************/
+
+/**********************
+ *   GLOBAL FUNCTIONS
+ **********************/
 
 void hui_heading_card_constructor_hook(lv_obj_t * obj)
 {

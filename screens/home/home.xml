@@ -32,6 +32,8 @@
 				<hui_heading_card-badge h_type="BUTTON" icon="&#xF02DC;" text="BBB" />
 				<hui_heading_card-badge h_type="TEXT" icon="&#xF02DC;" text="BBB" />
 			</hui_heading_card>
+			<ha_control_circular_slider />
+			<ha_control_circular_slider dual="true" size="200" />
 		</lv_obj>
 	</view>
 </screen>

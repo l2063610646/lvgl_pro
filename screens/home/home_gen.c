@@ -72,9 +72,16 @@ lv_obj_t * home_create(void)
 
         lv_obj_t * hui_heading_card_1 = hui_heading_card_create(lv_obj_2);
         hui_heading_card_set_heading(hui_heading_card_1, "01234567890");
+        lv_obj_t * hui_heading_card_badge_0 = hui_heading_card_add_badge(hui_heading_card_1, "BUTTON", "󰋜", "BBB");
+        lv_obj_t * hui_heading_card_badge_1 = hui_heading_card_add_badge(hui_heading_card_1, "TEXT", "󰋜", "BBB");
 
         lv_obj_t * hui_heading_card_2 = hui_heading_card_create(lv_obj_2);
-        hui_heading_card_set_heading(hui_heading_card_2, "01234");
+        hui_heading_card_set_heading(hui_heading_card_2, "01234567890");
+        hui_heading_card_set_actionable(hui_heading_card_2, true);
+        lv_obj_t * hui_heading_card_badge_2 = hui_heading_card_add_badge(hui_heading_card_2, "BUTTON", "󰋜", "AAA");
+        lv_obj_t * hui_heading_card_badge_3 = hui_heading_card_add_badge(hui_heading_card_2, "TEXT", "󰋜", "BBB");
+        lv_obj_t * hui_heading_card_badge_4 = hui_heading_card_add_badge(hui_heading_card_2, "TEXT", "󰋜", "CCC");
+        lv_obj_t * hui_heading_card_badge_5 = hui_heading_card_add_badge(hui_heading_card_2, "TEXT", "󰋜", "DDD");
 
         lv_obj_t * hui_heading_card_3 = hui_heading_card_create(lv_obj_2);
         hui_heading_card_set_heading(hui_heading_card_3, "012345678901234012345671128123123");
@@ -104,8 +111,14 @@ lv_obj_t * home_create(void)
         lv_obj_set_width(hui_heading_card_9, 600);
         hui_heading_card_set_heading(hui_heading_card_9, "01234");
         hui_heading_card_set_actionable(hui_heading_card_9, true);
-        lv_obj_t * hui_heading_card_badge_0 = hui_heading_card_add_badge(hui_heading_card_9, "BUTTON", "󰋜", "BBB");
-        lv_obj_t * hui_heading_card_badge_1 = hui_heading_card_add_badge(hui_heading_card_9, "TEXT", "󰋜", "BBB");
+        lv_obj_t * hui_heading_card_badge_6 = hui_heading_card_add_badge(hui_heading_card_9, "BUTTON", "󰋜", "BBB");
+        lv_obj_t * hui_heading_card_badge_7 = hui_heading_card_add_badge(hui_heading_card_9, "TEXT", "󰋜", "BBB");
+
+        ha_control_circular_slider_create(col);
+
+        lv_obj_t * ha_control_circular_slider_1 = ha_control_circular_slider_create(col);
+        ha_control_circular_slider_set_dual(ha_control_circular_slider_1, true);
+        ha_control_circular_slider_set_size(ha_control_circular_slider_1, 200);
 
         the_root = lv_obj_0;
     }

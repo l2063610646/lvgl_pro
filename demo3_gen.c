@@ -9,6 +9,7 @@
 #include "demo3_gen.h"
 
 #if defined(LV_USE_XML) && LV_USE_XML
+#include "widgets/ha_control_circular_slider/ha_control_circular_slider_private_gen.h"
 #include "widgets/ha_ripple/ha_ripple_private_gen.h"
 #include "widgets/hui_heading_badge/hui_heading_badge_private_gen.h"
 #include "widgets/hui_heading_card/hui_heading_card_private_gen.h"
@@ -177,6 +178,7 @@ void demo3_init_gen(const char * asset_path)
 
 #if defined(LV_USE_XML) && LV_USE_XML
     /* Register widgets */
+    ha_control_circular_slider_register();
     ha_ripple_register();
     hui_heading_badge_register();
     hui_heading_card_register();

@@ -116,6 +116,7 @@ void demo3_init_gen(const char * asset_path);
 
 /*Include all the widgets, components and screens of this library*/
 #include "screens/home/home_gen.h"
+#include "widgets/ha_control_circular_slider/ha_control_circular_slider_gen.h"
 #include "widgets/ha_ripple/ha_ripple_gen.h"
 #include "widgets/hui_heading_badge/hui_heading_badge_gen.h"
 #include "widgets/hui_heading_card/hui_heading_card_gen.h"
