@@ -88,6 +88,7 @@ static void mdi_icon_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
     lv_obj_t * the_root = NULL;
     #if DEMO3_CHECK_COMPILE_TARGET(DEMO3_TARGET_ALL)
     if (demo3_check_target(DEMO3_TARGET_ALL)) {
+        lv_obj_set_name(obj, "label");
         lv_label_set_text(obj, "󰅂");
         lv_obj_set_flag(obj, LV_OBJ_FLAG_CLICKABLE, false);
         lv_obj_set_style_text_font(obj, mdi_icon_font24_4, 0);

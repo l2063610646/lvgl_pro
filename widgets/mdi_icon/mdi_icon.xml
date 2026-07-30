@@ -10,5 +10,5 @@
 
 	<styles />
 
-	<view extends="lv_label" text="&#xF0142;" clickable="false" style_text_font="mdi_icon_font24_4" />
+	<view name="label" extends="lv_label" text="&#xF0142;" clickable="false" style_text_font="mdi_icon_font24_4" />
 </widget>

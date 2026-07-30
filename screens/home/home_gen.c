@@ -49,6 +49,21 @@ lv_obj_t * home_create(void)
         lv_obj_set_align(col, LV_ALIGN_TOP_MID);
         lv_obj_set_width(col, LV_SIZE_CONTENT);
         lv_obj_set_height(col, LV_SIZE_CONTENT);
+        lv_obj_t * test = lv_obj_create(col);
+        lv_obj_set_name(test, "test");
+        lv_obj_set_style_layout(test, LV_LAYOUT_FLEX, 0);
+        lv_obj_set_flex_flow(test, LV_FLEX_FLOW_ROW);
+        lv_obj_set_align(test, LV_ALIGN_TOP_MID);
+        lv_obj_set_width(test, LV_SIZE_CONTENT);
+        lv_obj_set_height(test, LV_SIZE_CONTENT);
+        lv_obj_t * mdi_icon_0 = mdi_icon_create(test);
+        mdi_icon_set_size(mdi_icon_0, 32);
+        mdi_icon_set_symbol(mdi_icon_0, "󰋜");
+
+        lv_obj_t * mdi_icon_1 = mdi_icon_create(test);
+        mdi_icon_set_size(mdi_icon_1, 48);
+        mdi_icon_set_symbol(mdi_icon_1, "󰋜");
+
         lv_obj_t * lv_obj_1 = lv_obj_create(col);
         lv_obj_set_width(lv_obj_1, 300);
         lv_obj_set_height(lv_obj_1, LV_SIZE_CONTENT);
@@ -60,6 +75,7 @@ lv_obj_t * home_create(void)
 
         lv_obj_t * hui_heading_card_1 = hui_heading_card_create(lv_obj_1);
         hui_heading_card_set_heading(hui_heading_card_1, "01234567890");
+        hui_heading_card_set_actionable(hui_heading_card_1, true);
         lv_obj_t * hui_heading_card_badge_0 = hui_heading_card_add_badge(hui_heading_card_1, "BUTTON", "󰋜", "BBB");
         lv_obj_t * hui_heading_card_badge_1 = hui_heading_card_add_badge(hui_heading_card_1, "TEXT", "󰋜", "BBB");
 
@@ -71,14 +87,6 @@ lv_obj_t * home_create(void)
         ha_control_circular_slider_set_low(ha_control_circular_slider_0, 0);
         ha_control_circular_slider_set_high(ha_control_circular_slider_0, 1000);
         ha_control_circular_slider_set_current(ha_control_circular_slider_0, 555);
-
-        lv_obj_t * mdi_icon_0 = mdi_icon_create(col);
-        mdi_icon_set_size(mdi_icon_0, 32);
-        mdi_icon_set_symbol(mdi_icon_0, "󰋜");
-
-        lv_obj_t * mdi_icon_1 = mdi_icon_create(col);
-        mdi_icon_set_size(mdi_icon_1, 48);
-        mdi_icon_set_symbol(mdi_icon_1, "󰋜");
 
         the_root = lv_obj_0;
     }
