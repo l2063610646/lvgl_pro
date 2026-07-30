@@ -6,6 +6,8 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font16_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font18_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font24_4_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font36_4_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font48_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_12_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_14_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_16_4_data.c
@@ -22,4 +24,7 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_badge/hui_heading_badge.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_card/hui_heading_card_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_card/hui_heading_card_xml_parser.c
-  ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_card/hui_heading_card.c)
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/hui_heading_card/hui_heading_card.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/mdi_icon/mdi_icon_gen.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/mdi_icon/mdi_icon_xml_parser.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/mdi_icon/mdi_icon.c)

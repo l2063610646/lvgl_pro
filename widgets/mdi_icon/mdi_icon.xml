@@ -1,0 +1,14 @@
+<widget>
+	<previews>
+		<preview width="320" height="240" style_bg_color="0xeee" />
+	</previews>
+
+	<api>
+		<prop name="size" type="int" />
+		<prop name="symbol" type="string" />
+	</api>
+
+	<styles />
+
+	<view extends="lv_label" text="&#xF0142;" clickable="false" style_text_font="mdi_icon_font24_4" />
+</widget>

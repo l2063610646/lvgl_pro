@@ -64,22 +64,21 @@ lv_obj_t * home_create(void)
         lv_obj_t * hui_heading_card_badge_1 = hui_heading_card_add_badge(hui_heading_card_1, "TEXT", "󰋜", "BBB");
 
         lv_obj_t * ha_control_circular_slider_0 = ha_control_circular_slider_create(col);
-        ha_control_circular_slider_set_value(ha_control_circular_slider_0, 10);
+        ha_control_circular_slider_set_dual(ha_control_circular_slider_0, true);
         ha_control_circular_slider_set_size(ha_control_circular_slider_0, 200);
-        ha_control_circular_slider_set_current(ha_control_circular_slider_0, 20);
-        ha_control_circular_slider_set_low(ha_control_circular_slider_0, 15);
-        ha_control_circular_slider_set_high(ha_control_circular_slider_0, 30);
-        ha_control_circular_slider_set_min(ha_control_circular_slider_0, 10);
-        ha_control_circular_slider_set_max(ha_control_circular_slider_0, 30);
+        ha_control_circular_slider_set_min(ha_control_circular_slider_0, 0);
+        ha_control_circular_slider_set_max(ha_control_circular_slider_0, 1000);
+        ha_control_circular_slider_set_low(ha_control_circular_slider_0, 0);
+        ha_control_circular_slider_set_high(ha_control_circular_slider_0, 1000);
+        ha_control_circular_slider_set_current(ha_control_circular_slider_0, 555);
 
-        lv_obj_t * ha_control_circular_slider_1 = ha_control_circular_slider_create(col);
-        ha_control_circular_slider_set_dual(ha_control_circular_slider_1, true);
-        ha_control_circular_slider_set_size(ha_control_circular_slider_1, 200);
-        ha_control_circular_slider_set_min(ha_control_circular_slider_1, 0);
-        ha_control_circular_slider_set_max(ha_control_circular_slider_1, 1000);
-        ha_control_circular_slider_set_low(ha_control_circular_slider_1, 0);
-        ha_control_circular_slider_set_high(ha_control_circular_slider_1, 1000);
-        ha_control_circular_slider_set_current(ha_control_circular_slider_1, 555);
+        lv_obj_t * mdi_icon_0 = mdi_icon_create(col);
+        mdi_icon_set_size(mdi_icon_0, 32);
+        mdi_icon_set_symbol(mdi_icon_0, "󰋜");
+
+        lv_obj_t * mdi_icon_1 = mdi_icon_create(col);
+        mdi_icon_set_size(mdi_icon_1, 48);
+        mdi_icon_set_symbol(mdi_icon_1, "󰋜");
 
         the_root = lv_obj_0;
     }

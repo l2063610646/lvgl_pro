@@ -73,9 +73,11 @@ bool demo3_check_target(uint32_t target);
  *----------------*/
 
 /* Targets: any */
-extern lv_font_t * mdi_icon_font24_4;
 extern lv_font_t * mdi_icon_font16_4;
 extern lv_font_t * mdi_icon_font18_4;
+extern lv_font_t * mdi_icon_font24_4;
+extern lv_font_t * mdi_icon_font36_4;
+extern lv_font_t * mdi_icon_font48_4;
 extern lv_font_t * roboto_regular_12_4;
 extern lv_font_t * roboto_regular_14_4;
 extern lv_font_t * roboto_regular_16_4;
@@ -120,6 +122,7 @@ void demo3_init_gen(const char * asset_path);
 #include "widgets/ha_ripple/ha_ripple_gen.h"
 #include "widgets/hui_heading_badge/hui_heading_badge_gen.h"
 #include "widgets/hui_heading_card/hui_heading_card_gen.h"
+#include "widgets/mdi_icon/mdi_icon_gen.h"
 
 #ifdef __cplusplus
 } /*extern "C"*/
