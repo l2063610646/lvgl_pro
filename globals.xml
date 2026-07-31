@@ -22,6 +22,14 @@
 	<fonts>
 		<!-- Add <bin> , <tiny_ttf>, <freetype> tags here -->
 		<bin
+			name="mdi_icon_font14_4"
+			as_file="false"
+			src_path="fonts/materialdesignicons-webfont.ttf"
+			bpp="4"
+			size="14"
+			range="0xF02DC,0xF0415,0xF0374,0xF0142"
+		/>
+		<bin
 			name="mdi_icon_font16_4"
 			as_file="false"
 			src_path="fonts/materialdesignicons-webfont.ttf"
@@ -65,5 +73,7 @@
 		<bin name="roboto_regular_14_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="14" />
 		<bin name="roboto_regular_16_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="16" />
 		<bin name="roboto_regular_18_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="18" />
+		<bin name="roboto_regular_20_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="20" />
+		<bin name="roboto_regular_48_4" as_file="false" src_path="fonts/Roboto-Regular.ttf" bpp="4" size="48" />
 	</fonts>
 </globals>

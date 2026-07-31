@@ -7,6 +7,7 @@
 			<lv_obj name="test" style_layout="flex" flex_flow="row" align="top_mid" width="content" height="content">
 				<mdi_icon size="32" symbol="&#xF02DC;" />
 				<mdi_icon size="48" symbol="&#xF02DC;" />
+				<ha_big_number value="876" unit="%" unit_position="HA_BIG_NUMBER_UNIT_TOP" decimal_places="1" />
 			</lv_obj>
 			<lv_obj width="300" height="content" style_pad_all="0" style_layout="flex" flex_flow="column">
 				<hui_heading_card heading="012345678901234012345671128123123" />

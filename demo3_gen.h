@@ -73,6 +73,7 @@ bool demo3_check_target(uint32_t target);
  *----------------*/
 
 /* Targets: any */
+extern lv_font_t * mdi_icon_font14_4;
 extern lv_font_t * mdi_icon_font16_4;
 extern lv_font_t * mdi_icon_font18_4;
 extern lv_font_t * mdi_icon_font24_4;
@@ -82,6 +83,8 @@ extern lv_font_t * roboto_regular_12_4;
 extern lv_font_t * roboto_regular_14_4;
 extern lv_font_t * roboto_regular_16_4;
 extern lv_font_t * roboto_regular_18_4;
+extern lv_font_t * roboto_regular_20_4;
+extern lv_font_t * roboto_regular_48_4;
 
 
 /*----------------
@@ -118,6 +121,7 @@ void demo3_init_gen(const char * asset_path);
 
 /*Include all the widgets, components and screens of this library*/
 #include "screens/home/home_gen.h"
+#include "widgets/ha_big_number/ha_big_number_gen.h"
 #include "widgets/ha_control_circular_slider/ha_control_circular_slider_gen.h"
 #include "widgets/ha_ripple/ha_ripple_gen.h"
 #include "widgets/hui_heading_badge/hui_heading_badge_gen.h"

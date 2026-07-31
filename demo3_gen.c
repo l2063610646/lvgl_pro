@@ -9,6 +9,7 @@
 #include "demo3_gen.h"
 
 #if defined(LV_USE_XML) && LV_USE_XML
+#include "widgets/ha_big_number/ha_big_number_private_gen.h"
 #include "widgets/ha_control_circular_slider/ha_control_circular_slider_private_gen.h"
 #include "widgets/ha_ripple/ha_ripple_private_gen.h"
 #include "widgets/hui_heading_badge/hui_heading_badge_private_gen.h"
@@ -62,6 +63,8 @@ static uint32_t demo3_target = DEMO3_TARGET_ALL;
  * Fonts
  *----------------*/
 
+lv_font_t * mdi_icon_font14_4;
+extern lv_font_t mdi_icon_font14_4_data;
 lv_font_t * mdi_icon_font16_4;
 extern lv_font_t mdi_icon_font16_4_data;
 lv_font_t * mdi_icon_font18_4;
@@ -80,6 +83,10 @@ lv_font_t * roboto_regular_16_4;
 extern lv_font_t roboto_regular_16_4_data;
 lv_font_t * roboto_regular_18_4;
 extern lv_font_t roboto_regular_18_4_data;
+lv_font_t * roboto_regular_20_4;
+extern lv_font_t roboto_regular_20_4_data;
+lv_font_t * roboto_regular_48_4;
+extern lv_font_t roboto_regular_48_4_data;
 
 /*----------------
  * Images
@@ -114,6 +121,12 @@ void demo3_init_gen(const char * asset_path)
 
     #if DEMO3_CHECK_COMPILE_TARGET(DEMO3_TARGET_ALL)
     if (demo3_check_target(DEMO3_TARGET_ALL)) {
+        if (!mdi_icon_font14_4) {
+            /* mdi_icon_font14_4 */
+            /* get font 'mdi_icon_font14_4' from a C array */
+            mdi_icon_font14_4 = &mdi_icon_font14_4_data;
+
+        }
         if (!mdi_icon_font16_4) {
             /* mdi_icon_font16_4 */
             /* get font 'mdi_icon_font16_4' from a C array */
@@ -168,6 +181,18 @@ void demo3_init_gen(const char * asset_path)
             roboto_regular_18_4 = &roboto_regular_18_4_data;
 
         }
+        if (!roboto_regular_20_4) {
+            /* roboto_regular_20_4 */
+            /* get font 'roboto_regular_20_4' from a C array */
+            roboto_regular_20_4 = &roboto_regular_20_4_data;
+
+        }
+        if (!roboto_regular_48_4) {
+            /* roboto_regular_48_4 */
+            /* get font 'roboto_regular_48_4' from a C array */
+            roboto_regular_48_4 = &roboto_regular_48_4_data;
+
+        }
     }
     #endif
 
@@ -195,6 +220,7 @@ void demo3_init_gen(const char * asset_path)
 
 #if defined(LV_USE_XML) && LV_USE_XML
     /* Register widgets */
+    ha_big_number_register();
     ha_control_circular_slider_register();
     ha_ripple_register();
     hui_heading_badge_register();
@@ -203,6 +229,7 @@ void demo3_init_gen(const char * asset_path)
 
     /* Check all fonts / default if needed. This prevents fonts that are used in one target but
        defined in another from causing assertion failures during rendering of the Preview. */
+    check_font(&mdi_icon_font14_4, "mdi_icon_font14_4");
     check_font(&mdi_icon_font16_4, "mdi_icon_font16_4");
     check_font(&mdi_icon_font18_4, "mdi_icon_font18_4");
     check_font(&mdi_icon_font24_4, "mdi_icon_font24_4");
@@ -212,8 +239,11 @@ void demo3_init_gen(const char * asset_path)
     check_font(&roboto_regular_14_4, "roboto_regular_14_4");
     check_font(&roboto_regular_16_4, "roboto_regular_16_4");
     check_font(&roboto_regular_18_4, "roboto_regular_18_4");
+    check_font(&roboto_regular_20_4, "roboto_regular_20_4");
+    check_font(&roboto_regular_48_4, "roboto_regular_48_4");
 
     /* Register fonts */
+    lv_xml_register_font(NULL, "mdi_icon_font14_4", mdi_icon_font14_4);
     lv_xml_register_font(NULL, "mdi_icon_font16_4", mdi_icon_font16_4);
     lv_xml_register_font(NULL, "mdi_icon_font18_4", mdi_icon_font18_4);
     lv_xml_register_font(NULL, "mdi_icon_font24_4", mdi_icon_font24_4);
@@ -223,6 +253,8 @@ void demo3_init_gen(const char * asset_path)
     lv_xml_register_font(NULL, "roboto_regular_14_4", roboto_regular_14_4);
     lv_xml_register_font(NULL, "roboto_regular_16_4", roboto_regular_16_4);
     lv_xml_register_font(NULL, "roboto_regular_18_4", roboto_regular_18_4);
+    lv_xml_register_font(NULL, "roboto_regular_20_4", roboto_regular_20_4);
+    lv_xml_register_font(NULL, "roboto_regular_48_4", roboto_regular_48_4);
 
     /* Register subjects */
 

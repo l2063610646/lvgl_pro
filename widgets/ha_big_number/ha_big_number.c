@@ -1,0 +1,165 @@
+/**
+ * @file ha_big_number.c
+ *
+ */
+
+/*********************
+ *      INCLUDES
+ *********************/
+
+#include "ha_big_number_gen.h"
+#include "ha_big_number_private_gen.h"
+#include "lvgl/src/core/lv_obj_style.h"
+#include "lvgl/src/core/lv_obj_style_gen.h"
+#include "lvgl/src/layouts/flex/lv_flex.h"
+#include <string.h>
+
+/*********************
+ *      DEFINES
+ *********************/
+
+/**********************
+ *      TYPEDEFS
+ **********************/
+
+/**********************
+ *  STATIC PROTOTYPES
+ **********************/
+
+/**********************
+ *  STATIC VARIABLES
+ **********************/
+
+/**********************
+ *      MACROS
+ **********************/
+
+/**********************
+ *   GLOBAL FUNCTIONS
+ **********************/
+static void ha_big_number_refresh(lv_obj_t * obj);
+
+void ha_big_number_constructor_hook(lv_obj_t * obj)
+{
+
+}
+
+void ha_big_number_destructor_hook(lv_obj_t * obj)
+{
+
+}
+
+void ha_big_number_event_hook(lv_event_t * e)
+{
+
+}
+
+void ha_big_number_set_value(lv_obj_t * obj, int32_t value)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    widget->value = value;
+    ha_big_number_refresh(obj);
+}
+
+void ha_big_number_set_decimal_places(lv_obj_t * obj, int32_t decimal_places)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    widget->decimal_places = decimal_places;
+    ha_big_number_refresh(obj);
+}
+
+void ha_big_number_set_unit(lv_obj_t * obj, const char * unit)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    lv_label_set_text(widget->unit_label, unit ? unit : "");
+}
+
+void ha_big_number_set_unit_position(lv_obj_t * obj, unit_position_def_t unit_position)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    widget->unit_position = unit_position;
+    ha_big_number_refresh(obj);
+}
+
+void ha_big_number_set_text_color(lv_obj_t * obj, lv_color_t text_color)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    widget->text_color = text_color;
+    ha_big_number_refresh(obj);
+}
+
+/**********************
+ *   STATIC FUNCTIONS
+ **********************/
+static int32_t pow10_i32(uint8_t n)
+{
+    int32_t result = 1;
+    while(n-- > 0) result *= 10;
+    return result;
+}
+
+static void format_parts(const ha_big_number_t * st, char * integer, size_t integer_len,
+                         char * decimal, size_t decimal_len)
+{
+    int32_t scale = pow10_i32(st->decimal_places);
+    int32_t whole = st->value / scale;
+    int32_t frac = st->value % scale;
+
+    if(st->value < 0 && whole == 0) {
+        lv_snprintf(integer, integer_len, "-0");
+    } else {
+        lv_snprintf(integer, integer_len, "%ld", whole);
+    }
+
+    if(st->decimal_places == 0) {
+        decimal[0] = '\0';
+        return;
+    }
+
+    if(frac < 0) frac = -frac;
+
+    char frac_buf[16];
+    lv_snprintf(frac_buf, sizeof(frac_buf), "%ld", frac);
+
+    size_t frac_len = strlen(frac_buf);
+    size_t pad = st->decimal_places > frac_len ? st->decimal_places - frac_len : 0;
+
+    if(pad >= decimal_len) pad = decimal_len - 1;
+    decimal[0] = '.';
+    for(size_t i = 0; i < pad && i + 1 < decimal_len; i++) {
+        decimal[i + 1] = '0';
+    }
+    decimal[pad + 1] = '\0';
+    lv_strncat(decimal, frac_buf, decimal_len - strlen(decimal) - 1);
+}
+
+static void ha_big_number_refresh(lv_obj_t * obj)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+
+    int32_t scale = 1;
+    for(int32_t i = 0; i < widget->decimal_places; i++) {
+        scale *= 10;
+    }
+
+    char integer_str[24];
+    char decimal_str[16];
+    format_parts(widget, integer_str, sizeof(integer_str), decimal_str, sizeof(decimal_str));
+
+    lv_label_set_text(widget->integer_label, integer_str);
+    lv_label_set_text(widget->decimal_label, decimal_str);
+
+    if (widget->unit_position == UNIT_POSITION_DEF_HA_BIG_NUMBER_UNIT_BOTTOM) {
+        lv_obj_set_flex_flow(widget->addon, LV_FLEX_FLOW_ROW);
+        lv_obj_set_flex_align(widget->addon, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_END);
+        lv_obj_set_style_pad_gap(widget->addon, 2, 0);
+    } else {
+        lv_obj_set_flex_flow(widget->addon, LV_FLEX_FLOW_COLUMN_REVERSE);
+        lv_obj_set_flex_align(widget->addon, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END);
+        lv_obj_set_style_pad_gap(widget->addon, 0, 0);
+    }
+
+    lv_obj_set_style_text_color(widget->integer_label, widget->text_color, 0);
+    lv_obj_set_style_text_color(widget->decimal_label, widget->text_color, 0);
+    lv_obj_set_style_text_color(widget->unit_label, widget->text_color, 0);
+}

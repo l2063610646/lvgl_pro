@@ -64,6 +64,12 @@ lv_obj_t * home_create(void)
         mdi_icon_set_size(mdi_icon_1, 48);
         mdi_icon_set_symbol(mdi_icon_1, "󰋜");
 
+        lv_obj_t * ha_big_number_0 = ha_big_number_create(test);
+        ha_big_number_set_value(ha_big_number_0, 876);
+        ha_big_number_set_unit(ha_big_number_0, "%");
+        ha_big_number_set_unit_position(ha_big_number_0, UNIT_POSITION_DEF_HA_BIG_NUMBER_UNIT_TOP);
+        ha_big_number_set_decimal_places(ha_big_number_0, 1);
+
         lv_obj_t * lv_obj_1 = lv_obj_create(col);
         lv_obj_set_width(lv_obj_1, 300);
         lv_obj_set_height(lv_obj_1, LV_SIZE_CONTENT);

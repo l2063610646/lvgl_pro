@@ -3,6 +3,7 @@ list(
   LV_EDITOR_PROJECT_SOURCES
   ${CMAKE_CURRENT_LIST_DIR}/demo3_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/demo3.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font14_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font16_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font18_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font24_4_data.c
@@ -12,7 +13,12 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_14_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_16_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_18_4_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_20_4_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/roboto_regular_48_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/screens/home/home_gen.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_big_number/ha_big_number_gen.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_big_number/ha_big_number_xml_parser.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_big_number/ha_big_number.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_xml_parser.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider.c
