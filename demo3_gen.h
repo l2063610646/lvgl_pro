@@ -122,6 +122,7 @@ void demo3_init_gen(const char * asset_path);
 /*Include all the widgets, components and screens of this library*/
 #include "screens/home/home_gen.h"
 #include "widgets/ha_big_number/ha_big_number_gen.h"
+#include "widgets/ha_button/ha_button_gen.h"
 #include "widgets/ha_control_circular_slider/ha_control_circular_slider_gen.h"
 #include "widgets/ha_control_slider/ha_control_slider_gen.h"
 #include "widgets/ha_ripple/ha_ripple_gen.h"

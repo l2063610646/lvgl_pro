@@ -19,6 +19,9 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_big_number/ha_big_number_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_big_number/ha_big_number_xml_parser.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_big_number/ha_big_number.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_button/ha_button_gen.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_button/ha_button_xml_parser.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_button/ha_button.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_xml_parser.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider.c
