@@ -9,6 +9,7 @@
 #define HA_SLIDER_DEFAULT_LENGTH 240
 #define HA_SLIDER_THICKNESS      40
 #define HA_SLIDER_HANDLE_SIZE     4
+#define HA_SLIDER_TOOLTIP_GAP     4
 
 static int32_t clamp_i32(int32_t value, int32_t min, int32_t max)
 {
@@ -59,16 +60,6 @@ static void refresh_layout(lv_obj_t * obj)
     lv_obj_set_style_radius(slider->track, 12, 0);
     lv_obj_set_style_clip_corner(slider->track, true, 0);
 
-    /* Reparent bar inside track for overflow clipping */
-    if(lv_obj_get_parent(slider->bar) != slider->track) {
-        lv_obj_set_parent(slider->bar, slider->track);
-    }
-
-    /* Reparent handle inside bar for smooth relative movement */
-    if(lv_obj_get_parent(slider->handle) != slider->bar) {
-        lv_obj_set_parent(slider->handle, slider->bar);
-    }
-
     /* 2. Bar setup - fixed 100% full width and height */
     lv_obj_set_style_bg_color(slider->bar, slider->active_color, 0);
     lv_obj_set_style_bg_opa(slider->bar, LV_OPA_COVER, 0);
@@ -92,6 +83,10 @@ static void refresh_layout(lv_obj_t * obj)
     int32_t length = slider->vertical ? height : width;
     int32_t cross = slider->vertical ? width : height;
     int32_t handle_margin = cross / 8;
+    int32_t handle_spacing = 2 * handle_margin + HA_SLIDER_HANDLE_SIZE;
+    int32_t slider_size = slider->show_handle ? length - handle_spacing : length;
+    slider_size = LV_MAX(1, slider_size);
+    int32_t position = visual_position(slider, slider_size);
 
     if(slider->mode == HA_CONTROL_SLIDER_MODE_CURSOR) {
         lv_obj_add_flag(slider->bar, LV_OBJ_FLAG_HIDDEN);
@@ -99,7 +94,7 @@ static void refresh_layout(lv_obj_t * obj)
         lv_obj_remove_flag(slider->cursor, LV_OBJ_FLAG_HIDDEN);
 
         int32_t cursor_size = LV_MAX(HA_SLIDER_HANDLE_SIZE, cross / 4);
-        int32_t position = visual_position(slider, LV_MAX(1, length - cursor_size));
+        position = visual_position(slider, LV_MAX(1, length - cursor_size));
 
         if(slider->vertical) {
             /* Vertical CURSOR mode: 0 at bottom, 100% at top */
@@ -115,11 +110,8 @@ static void refresh_layout(lv_obj_t * obj)
         lv_obj_center(slider->cursor_mark);
     } else {
         lv_obj_remove_flag(slider->bar, LV_OBJ_FLAG_HIDDEN);
-        if(slider->show_handle) lv_obj_remove_flag(slider->handle, LV_OBJ_FLAG_HIDDEN);
-        else lv_obj_add_flag(slider->handle, LV_OBJ_FLAG_HIDDEN);
+        lv_obj_remove_flag(slider->handle, LV_OBJ_FLAG_HIDDEN);
         lv_obj_add_flag(slider->cursor, LV_OBJ_FLAG_HIDDEN);
-
-        int32_t position = visual_position(slider, length);
 
         if(slider->vertical) {
             /* Vertical START/END mode: fixed 100% size bar translated vertically */
@@ -130,7 +122,7 @@ static void refresh_layout(lv_obj_t * obj)
                 lv_obj_set_pos(slider->handle, width / 4, height - handle_margin - HA_SLIDER_HANDLE_SIZE);
             } else {
                 /* START mode: filled from bottom up to position */
-                lv_obj_set_pos(slider->bar, 0, height - position);
+                lv_obj_set_pos(slider->bar, 0, slider_size - position);
                 lv_obj_set_pos(slider->handle, width / 4, handle_margin);
             }
             lv_obj_set_size(slider->handle, width / 2, HA_SLIDER_HANDLE_SIZE);
@@ -143,7 +135,7 @@ static void refresh_layout(lv_obj_t * obj)
                 lv_obj_set_pos(slider->handle, handle_margin, height / 4);
             } else {
                 /* START mode: filled from left to right */
-                lv_obj_set_pos(slider->bar, position - width, 0);
+                lv_obj_set_pos(slider->bar, position - slider_size, 0);
                 lv_obj_set_pos(slider->handle, width - handle_margin - HA_SLIDER_HANDLE_SIZE, height / 4);
             }
             lv_obj_set_size(slider->handle, HA_SLIDER_HANDLE_SIZE, height / 2);
@@ -157,13 +149,13 @@ static void refresh_layout(lv_obj_t * obj)
     int32_t tooltip_height = lv_obj_get_height(slider->tooltip);
     if(slider->vertical) {
         int32_t y = height - visual_position(slider, height) - tooltip_height / 2;
-        lv_obj_set_pos(slider->tooltip, -tooltip_width - 4,
+        lv_obj_set_pos(slider->tooltip, -tooltip_width - HA_SLIDER_TOOLTIP_GAP,
                        clamp_i32(y, -tooltip_height / 2, height - tooltip_height / 2));
     } else {
         int32_t x = visual_position(slider, width) - tooltip_width / 2;
         lv_obj_set_pos(slider->tooltip,
                        clamp_i32(x, -tooltip_width / 2, width - tooltip_width / 2),
-                       -tooltip_height - 4);
+                       -tooltip_height - HA_SLIDER_TOOLTIP_GAP);
     }
 
     bool show_tooltip = slider->tooltip_mode == HA_CONTROL_SLIDER_TOOLTIP_ALWAYS ||
@@ -178,6 +170,7 @@ static void refresh_layout(lv_obj_t * obj)
                                slider->vertical ? LV_SLIDER_ORIENTATION_VERTICAL : LV_SLIDER_ORIENTATION_HORIZONTAL);
     lv_obj_move_to_index(slider->touch_slider, lv_obj_get_child_count(obj) - 1);
     lv_obj_move_to_index(slider->tooltip, lv_obj_get_child_count(obj) - 1);
+    lv_obj_refresh_ext_draw_size(obj);
 }
 
 static void touch_event_cb(lv_event_t * e)
@@ -213,7 +206,7 @@ void ha_control_slider_constructor_hook(lv_obj_t * obj)
     slider->mode = HA_CONTROL_SLIDER_MODE_START;
     slider->tooltip_mode = HA_CONTROL_SLIDER_TOOLTIP_INTERACTION;
     slider->vertical = false;
-    slider->show_handle = true;
+    slider->show_handle = false;
     slider->inverted = false;
     slider->disabled = false;
     slider->pressed = false;
@@ -237,7 +230,31 @@ void ha_control_slider_destructor_hook(lv_obj_t * obj)
 
 void ha_control_slider_event_hook(lv_event_t * e)
 {
-    if(lv_event_get_code(e) == LV_EVENT_SIZE_CHANGED) refresh_layout(lv_event_get_target_obj(e));
+    lv_obj_t * obj = lv_event_get_target_obj(e);
+    ha_control_slider_t * slider = (ha_control_slider_t *)obj;
+    lv_event_code_t code = lv_event_get_code(e);
+
+    if(code == LV_EVENT_SIZE_CHANGED) {
+        refresh_layout(obj);
+    } else if(code == LV_EVENT_REFR_EXT_DRAW_SIZE && slider->tooltip != NULL) {
+        lv_obj_update_layout(slider->tooltip);
+
+        int32_t tooltip_width = lv_obj_get_width(slider->tooltip);
+        int32_t tooltip_height = lv_obj_get_height(slider->tooltip);
+        int32_t tooltip_shadow = lv_obj_get_ext_draw_size(slider->tooltip);
+        int32_t outward_extent;
+        int32_t endpoint_extent;
+
+        if(slider->vertical) {
+            outward_extent = tooltip_width + HA_SLIDER_TOOLTIP_GAP + tooltip_shadow;
+            endpoint_extent = tooltip_height / 2 + tooltip_shadow;
+        } else {
+            outward_extent = tooltip_height + HA_SLIDER_TOOLTIP_GAP + tooltip_shadow;
+            endpoint_extent = tooltip_width / 2 + tooltip_shadow;
+        }
+
+        lv_event_set_ext_draw_size(e, LV_MAX(outward_extent, endpoint_extent));
+    }
 }
 
 int32_t ha_control_slider_get_value(lv_obj_t * obj)

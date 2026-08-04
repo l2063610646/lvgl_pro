@@ -96,9 +96,9 @@ void ha_control_slider_set_mode(lv_obj_t * ha_control_slider, ha_control_slider_
 void ha_control_slider_set_vertical(lv_obj_t * ha_control_slider, bool vertical);
 
 /**
- * Display handle line
+ * Reserve endpoint space for the handle line
  * @param obj   pointer to a ha_control_slider
- * @param show_handle  Display handle line
+ * @param show_handle  Reserve endpoint space for the handle line
  */
 void ha_control_slider_set_show_handle(lv_obj_t * ha_control_slider, bool show_handle);
 

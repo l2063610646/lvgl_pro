@@ -22,7 +22,7 @@
 		<prop name="step" type="int" default="1" help="Step increment" />
 		<prop name="mode" type="enum:ha_control_slider_mode" default="HA_CONTROL_SLIDER_MODE_START" help="Slider bar mode" />
 		<prop name="vertical" type="bool" default="false" help="Vertical layout orientation" />
-		<prop name="show_handle" type="bool" default="true" help="Display handle line" />
+		<prop name="show_handle" type="bool" default="false" help="Reserve endpoint space for the handle line" />
 		<prop name="inverted" type="bool" default="false" help="Invert direction mapping" />
 		<prop name="disabled" type="bool" default="false" help="Whether the slider is disabled" />
 		<prop name="tooltip_mode" type="enum:ha_control_slider_tooltip_mode" default="HA_CONTROL_SLIDER_TOOLTIP_INTERACTION" help="Tooltip visibility mode" />
@@ -69,29 +69,30 @@
 	<view
 		extends="lv_obj"
 		scrollable="false"
+		overflow_visible="true"
 	>
 		<remove_style_all />
 		<style name="style_base" />
 
 		<lv_obj name="track" clickable="false" scrollable="false">
 			<remove_style_all />
-		</lv_obj>
-		<lv_obj name="bar" clickable="false" scrollable="false">
-			<remove_style_all />
-		</lv_obj>
-		<lv_obj name="handle" clickable="false" scrollable="false">
-			<remove_style_all />
-		</lv_obj>
-		<lv_obj name="cursor" clickable="false" scrollable="false">
-			<remove_style_all />
-			<lv_obj name="cursor_mark" clickable="false" scrollable="false">
+			<lv_obj name="bar" clickable="false" scrollable="false">
 				<remove_style_all />
+				<lv_obj name="handle" clickable="false" scrollable="false">
+					<remove_style_all />
+				</lv_obj>
+			</lv_obj>
+			<lv_obj name="cursor" clickable="false" scrollable="false">
+				<remove_style_all />
+				<lv_obj name="cursor_mark" clickable="false" scrollable="false">
+					<remove_style_all />
+				</lv_obj>
 			</lv_obj>
 		</lv_obj>
 		<lv_label name="tooltip" text="0">
 			<style name="style_tooltip" />
 		</lv_label>
-		<lv_slider name="touch_slider">
+		<lv_slider name="touch_slider" ext_click_area="8">
 			<style name="style_touch_slider_main" selector="main" />
 			<style name="style_touch_slider_indicator" selector="indicator" />
 			<style name="style_touch_slider_knob" selector="knob" />

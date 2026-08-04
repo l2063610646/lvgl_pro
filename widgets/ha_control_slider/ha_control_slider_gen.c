@@ -117,6 +117,7 @@ static void ha_control_slider_constructor(const lv_obj_class_t * class_p, lv_obj
     #if DEMO3_CHECK_COMPILE_TARGET(DEMO3_TARGET_ALL)
     if (demo3_check_target(DEMO3_TARGET_ALL)) {
         lv_obj_set_flag(obj, LV_OBJ_FLAG_SCROLLABLE, false);
+        lv_obj_set_flag(obj, LV_OBJ_FLAG_OVERFLOW_VISIBLE, true);
 
         lv_obj_remove_style_all(obj);
         lv_obj_add_style(obj, &style_base, 0);
@@ -126,22 +127,20 @@ static void ha_control_slider_constructor(const lv_obj_class_t * class_p, lv_obj
         lv_obj_set_flag(track, LV_OBJ_FLAG_SCROLLABLE, false);
         widget->track = track;
         lv_obj_remove_style_all(track);
-
-        lv_obj_t * bar = lv_obj_create(obj);
+        lv_obj_t * bar = lv_obj_create(track);
         lv_obj_set_name(bar, "bar");
         lv_obj_set_flag(bar, LV_OBJ_FLAG_CLICKABLE, false);
         lv_obj_set_flag(bar, LV_OBJ_FLAG_SCROLLABLE, false);
         widget->bar = bar;
         lv_obj_remove_style_all(bar);
-
-        lv_obj_t * handle = lv_obj_create(obj);
+        lv_obj_t * handle = lv_obj_create(bar);
         lv_obj_set_name(handle, "handle");
         lv_obj_set_flag(handle, LV_OBJ_FLAG_CLICKABLE, false);
         lv_obj_set_flag(handle, LV_OBJ_FLAG_SCROLLABLE, false);
         widget->handle = handle;
         lv_obj_remove_style_all(handle);
 
-        lv_obj_t * cursor = lv_obj_create(obj);
+        lv_obj_t * cursor = lv_obj_create(track);
         lv_obj_set_name(cursor, "cursor");
         lv_obj_set_flag(cursor, LV_OBJ_FLAG_CLICKABLE, false);
         lv_obj_set_flag(cursor, LV_OBJ_FLAG_SCROLLABLE, false);
@@ -162,6 +161,7 @@ static void ha_control_slider_constructor(const lv_obj_class_t * class_p, lv_obj
 
         lv_obj_t * touch_slider = lv_slider_create(obj);
         lv_obj_set_name(touch_slider, "touch_slider");
+        lv_obj_set_ext_click_area(touch_slider, 8);
         widget->touch_slider = touch_slider;
         lv_obj_add_style(touch_slider, &style_touch_slider_main, LV_PART_MAIN);
         lv_obj_add_style(touch_slider, &style_touch_slider_indicator, LV_PART_INDICATOR);
