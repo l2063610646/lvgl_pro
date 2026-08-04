@@ -1,0 +1,100 @@
+<widget>
+	<previews>
+		<preview width="320" height="100" style_bg_color="0xeeeeee" />
+	</previews>
+
+	<api>
+		<enumdef name="ha_control_slider_mode">
+			<enum name="HA_CONTROL_SLIDER_MODE_START" value="0" />
+			<enum name="HA_CONTROL_SLIDER_MODE_END" value="1" />
+			<enum name="HA_CONTROL_SLIDER_MODE_CURSOR" value="2" />
+		</enumdef>
+
+		<enumdef name="ha_control_slider_tooltip_mode">
+			<enum name="HA_CONTROL_SLIDER_TOOLTIP_NEVER" value="0" />
+			<enum name="HA_CONTROL_SLIDER_TOOLTIP_ALWAYS" value="1" />
+			<enum name="HA_CONTROL_SLIDER_TOOLTIP_INTERACTION" value="2" />
+		</enumdef>
+
+		<prop name="value" type="int" default="40" help="Current slider value" />
+		<prop name="min" type="int" default="0" help="Minimum value" />
+		<prop name="max" type="int" default="100" help="Maximum value" />
+		<prop name="step" type="int" default="1" help="Step increment" />
+		<prop name="mode" type="enum:ha_control_slider_mode" default="HA_CONTROL_SLIDER_MODE_START" help="Slider bar mode" />
+		<prop name="vertical" type="bool" default="false" help="Vertical layout orientation" />
+		<prop name="show_handle" type="bool" default="true" help="Display handle line" />
+		<prop name="inverted" type="bool" default="false" help="Invert direction mapping" />
+		<prop name="disabled" type="bool" default="false" help="Whether the slider is disabled" />
+		<prop name="tooltip_mode" type="enum:ha_control_slider_tooltip_mode" default="HA_CONTROL_SLIDER_TOOLTIP_INTERACTION" help="Tooltip visibility mode" />
+		<prop name="unit" type="string" default="" help="Unit string" />
+		<prop name="track_color" type="color" default="0x9e9e9e" help="Track background color" />
+		<prop name="active_color" type="color" default="0x03a9f4" help="Active fill bar color" />
+	</api>
+
+	<styles>
+		<style
+			name="style_base"
+			width="240"
+			height="40"
+			bg_opa="0%"
+			pad_all="0"
+			border_width="0"
+		/>
+		<style
+			name="style_tooltip"
+			bg_color="0xFFFFFF"
+			bg_opa="100%"
+			text_color="0x212121"
+			radius="8"
+			pad_hor="6"
+			pad_ver="3"
+			shadow_width="5"
+			shadow_opa="20%"
+		/>
+		<style
+			name="style_touch_slider_main"
+			bg_opa="0%"
+			border_opa="0%"
+		/>
+		<style
+			name="style_touch_slider_indicator"
+			bg_opa="0%"
+		/>
+		<style
+			name="style_touch_slider_knob"
+			bg_opa="0%"
+		/>
+	</styles>
+
+	<view
+		extends="lv_obj"
+		scrollable="false"
+	>
+		<remove_style_all />
+		<style name="style_base" />
+
+		<lv_obj name="track" clickable="false" scrollable="false">
+			<remove_style_all />
+		</lv_obj>
+		<lv_obj name="bar" clickable="false" scrollable="false">
+			<remove_style_all />
+		</lv_obj>
+		<lv_obj name="handle" clickable="false" scrollable="false">
+			<remove_style_all />
+		</lv_obj>
+		<lv_obj name="cursor" clickable="false" scrollable="false">
+			<remove_style_all />
+			<lv_obj name="cursor_mark" clickable="false" scrollable="false">
+				<remove_style_all />
+			</lv_obj>
+		</lv_obj>
+		<lv_label name="tooltip" text="0">
+			<style name="style_tooltip" />
+		</lv_label>
+		<lv_slider name="touch_slider">
+			<style name="style_touch_slider_main" selector="main" />
+			<style name="style_touch_slider_indicator" selector="indicator" />
+			<style name="style_touch_slider_knob" selector="knob" />
+		</lv_slider>
+	</view>
+</widget>

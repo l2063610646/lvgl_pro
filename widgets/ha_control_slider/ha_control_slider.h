@@ -1,0 +1,31 @@
+/**
+ * @file ha_control_slider.h
+ */
+
+#ifndef HA_CONTROL_SLIDER_H
+#define HA_CONTROL_SLIDER_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define HA_CONTROL_SLIDER_USER_DATA bool pressed;
+
+#include "ha_control_slider_gen.h"
+
+#define HA_CONTROL_SLIDER_MODE_START       HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_START
+#define HA_CONTROL_SLIDER_MODE_END         HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_END
+#define HA_CONTROL_SLIDER_MODE_CURSOR      HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_CURSOR
+
+#define HA_CONTROL_SLIDER_TOOLTIP_NEVER        HA_CONTROL_SLIDER_TOOLTIP_MODE_HA_CONTROL_SLIDER_TOOLTIP_NEVER
+#define HA_CONTROL_SLIDER_TOOLTIP_ALWAYS       HA_CONTROL_SLIDER_TOOLTIP_MODE_HA_CONTROL_SLIDER_TOOLTIP_ALWAYS
+#define HA_CONTROL_SLIDER_TOOLTIP_INTERACTION  HA_CONTROL_SLIDER_TOOLTIP_MODE_HA_CONTROL_SLIDER_TOOLTIP_INTERACTION
+
+int32_t ha_control_slider_get_value(lv_obj_t * obj);
+void ha_control_slider_set_range(lv_obj_t * obj, int32_t min, int32_t max);
+
+#ifdef __cplusplus
+} /* extern "C" */
+#endif
+
+#endif /* HA_CONTROL_SLIDER_H */

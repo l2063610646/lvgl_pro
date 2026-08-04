@@ -22,6 +22,9 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_xml_parser.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_slider/ha_control_slider_gen.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_slider/ha_control_slider_xml_parser.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_slider/ha_control_slider.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_ripple/ha_ripple_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_ripple/ha_ripple_xml_parser.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_ripple/ha_ripple.c

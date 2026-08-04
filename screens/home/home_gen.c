@@ -94,6 +94,59 @@ lv_obj_t * home_create(void)
         ha_control_circular_slider_set_high(ha_control_circular_slider_0, 1000);
         ha_control_circular_slider_set_current(ha_control_circular_slider_0, 555);
 
+        lv_obj_t * ha_control_slider_0 = ha_control_slider_create(col);
+        ha_control_slider_set_value(ha_control_slider_0, 100);
+        lv_obj_set_width(ha_control_slider_0, 200);
+        lv_obj_set_height(ha_control_slider_0, 50);
+        ha_control_slider_set_mode(ha_control_slider_0, HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_START);
+
+        lv_obj_t * ha_control_slider_1 = ha_control_slider_create(col);
+        ha_control_slider_set_value(ha_control_slider_1, 100);
+        lv_obj_set_width(ha_control_slider_1, 200);
+        lv_obj_set_height(ha_control_slider_1, 50);
+        ha_control_slider_set_mode(ha_control_slider_1, HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_END);
+
+        lv_obj_t * ha_control_slider_2 = ha_control_slider_create(col);
+        ha_control_slider_set_value(ha_control_slider_2, 100);
+        lv_obj_set_width(ha_control_slider_2, 200);
+        lv_obj_set_height(ha_control_slider_2, 50);
+        ha_control_slider_set_mode(ha_control_slider_2, HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_CURSOR);
+
+        lv_obj_t * ha_control_slider_3 = ha_control_slider_create(col);
+        ha_control_slider_set_value(ha_control_slider_3, 100);
+        lv_obj_set_width(ha_control_slider_3, 200);
+        lv_obj_set_height(ha_control_slider_3, 50);
+
+        lv_obj_t * lv_obj_2 = lv_obj_create(col);
+        lv_obj_set_style_layout(lv_obj_2, LV_LAYOUT_FLEX, 0);
+        lv_obj_set_flex_flow(lv_obj_2, LV_FLEX_FLOW_ROW);
+        lv_obj_set_align(lv_obj_2, LV_ALIGN_TOP_MID);
+        lv_obj_set_width(lv_obj_2, LV_SIZE_CONTENT);
+        lv_obj_set_height(lv_obj_2, LV_SIZE_CONTENT);
+        lv_obj_t * ha_control_slider_4 = ha_control_slider_create(lv_obj_2);
+        ha_control_slider_set_value(ha_control_slider_4, 100);
+        ha_control_slider_set_vertical(ha_control_slider_4, true);
+        lv_obj_set_width(ha_control_slider_4, 50);
+        lv_obj_set_height(ha_control_slider_4, 200);
+        ha_control_slider_set_show_handle(ha_control_slider_4, true);
+        ha_control_slider_set_mode(ha_control_slider_4, HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_START);
+
+        lv_obj_t * ha_control_slider_5 = ha_control_slider_create(lv_obj_2);
+        ha_control_slider_set_value(ha_control_slider_5, 100);
+        ha_control_slider_set_vertical(ha_control_slider_5, true);
+        lv_obj_set_width(ha_control_slider_5, 50);
+        lv_obj_set_height(ha_control_slider_5, 200);
+        ha_control_slider_set_show_handle(ha_control_slider_5, true);
+        ha_control_slider_set_mode(ha_control_slider_5, HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_END);
+
+        lv_obj_t * ha_control_slider_6 = ha_control_slider_create(lv_obj_2);
+        ha_control_slider_set_value(ha_control_slider_6, 100);
+        ha_control_slider_set_vertical(ha_control_slider_6, true);
+        lv_obj_set_width(ha_control_slider_6, 50);
+        lv_obj_set_height(ha_control_slider_6, 200);
+        ha_control_slider_set_show_handle(ha_control_slider_6, true);
+        ha_control_slider_set_mode(ha_control_slider_6, HA_CONTROL_SLIDER_MODE_HA_CONTROL_SLIDER_MODE_CURSOR);
+
         the_root = lv_obj_0;
     }
     #endif

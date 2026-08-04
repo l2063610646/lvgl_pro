@@ -17,6 +17,73 @@
 				</hui_heading_card>
 			</lv_obj>
 			<ha_control_circular_slider dual="true" size="200" min="0" max="1000" low="0" high="1000" current="555" />
+			<ha_control_slider value="100" width="200" height="50" mode="HA_CONTROL_SLIDER_MODE_START" />
+			<ha_control_slider value="100" width="200" height="50" mode="HA_CONTROL_SLIDER_MODE_END" />
+			<ha_control_slider value="100" width="200" height="50" mode="HA_CONTROL_SLIDER_MODE_CURSOR" />
+
+			<lv_obj style_layout="flex" flex_flow="row" align="top_mid" width="content" height="content">
+				<ha_control_slider
+					value="100"
+					vertical="true"
+					width="50"
+					height="200"
+					show_handle="true"
+					mode="HA_CONTROL_SLIDER_MODE_START"
+				/>
+				<ha_control_slider
+					value="100"
+					vertical="true"
+					width="50"
+					height="200"
+					show_handle="true"
+					mode="HA_CONTROL_SLIDER_MODE_END"
+				/>
+				<ha_control_slider
+					value="100"
+					vertical="true"
+					width="50"
+					height="200"
+					show_handle="true"
+					mode="HA_CONTROL_SLIDER_MODE_CURSOR"
+				/>
+			</lv_obj>
+			<!-- <ha_control_slider
+				value="100"
+				width="200"
+				label="Label"
+				tooltip_mode="HA_SLIDER_TOOLTIP_INTERACTION"
+				height="30"
+				mode="HA_SLIDER_MODE_START"
+				show_handle="true"
+			/>
+			<lv_label text="HA_SLIDER_MODE_START" />
+			<ha_control_slider
+				value="100"
+				width="200"
+				label="Label"
+				tooltip_mode="HA_SLIDER_TOOLTIP_INTERACTION"
+				height="30"
+				mode="HA_SLIDER_MODE_END"
+				show_handle="true"
+			/>
+			<lv_label text="HA_SLIDER_MODE_END" />
+			<ha_control_slider
+				value="100"
+				width="200"
+				label="Label"
+				tooltip_mode="HA_SLIDER_TOOLTIP_INTERACTION"
+				height="30"
+				mode="HA_SLIDER_MODE_CURSOR"
+			/>
+			<lv_label text="HA_SLIDER_MODE_CURSOR" />
+			<ha_control_slider
+				vertical="true"
+				width="30"
+				height="100"
+				inverted="true"
+				tooltip_position="HA_SLIDER_TOOLTIP_RIGHT"
+				mode="HA_SLIDER_MODE_START"
+			/> -->
 		</lv_obj>
 	</view>
 </screen>

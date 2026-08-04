@@ -11,6 +11,7 @@
 #if defined(LV_USE_XML) && LV_USE_XML
 #include "widgets/ha_big_number/ha_big_number_private_gen.h"
 #include "widgets/ha_control_circular_slider/ha_control_circular_slider_private_gen.h"
+#include "widgets/ha_control_slider/ha_control_slider_private_gen.h"
 #include "widgets/ha_ripple/ha_ripple_private_gen.h"
 #include "widgets/hui_heading_badge/hui_heading_badge_private_gen.h"
 #include "widgets/hui_heading_card/hui_heading_card_private_gen.h"
@@ -222,6 +223,7 @@ void demo3_init_gen(const char * asset_path)
     /* Register widgets */
     ha_big_number_register();
     ha_control_circular_slider_register();
+    ha_control_slider_register();
     ha_ripple_register();
     hui_heading_badge_register();
     hui_heading_card_register();
