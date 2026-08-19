@@ -24,6 +24,7 @@
 /*********************
  *      DEFINES
  *********************/
+static circular_slider_mode_t circular_slider_mode_text_to_enum(const char * txt);
 
 /**********************
  *      TYPEDEFS
@@ -95,6 +96,18 @@ void ha_control_circular_slider_xml_apply(lv_xml_parser_state_t * state, const c
             ha_control_circular_slider_set_step(item, lv_xml_atoi(value));
         } else if(lv_streq("size", name)) {
             ha_control_circular_slider_set_size(item, lv_xml_atoi(value));
+        } else if(lv_streq("low_color", name)) {
+            ha_control_circular_slider_set_low_color(item, lv_color_hex(lv_xml_atoi(value)));
+        } else if(lv_streq("high_color", name)) {
+            ha_control_circular_slider_set_high_color(item, lv_color_hex(lv_xml_atoi(value)));
+        } else if(lv_streq("active_color", name)) {
+            ha_control_circular_slider_set_active_color(item, lv_color_hex(lv_xml_atoi(value)));
+        } else if(lv_streq("inactive", name)) {
+            ha_control_circular_slider_set_inactive(item, lv_streq(value, "true") || lv_streq(value, "1"));
+        } else if(lv_streq("show_knob", name)) {
+            ha_control_circular_slider_set_show_knob(item, lv_streq(value, "true") || lv_streq(value, "1"));
+        } else if(lv_streq("mode", name)) {
+            ha_control_circular_slider_set_mode(item, circular_slider_mode_text_to_enum(value));
         }
     }
 }
@@ -107,5 +120,22 @@ void ha_control_circular_slider_register(void)
 /**********************
  *   STATIC FUNCTIONS
  **********************/
+static circular_slider_mode_t circular_slider_mode_text_to_enum(const char * txt)
+{
+    if(lv_streq(txt, "START")) {
+        return CIRCULAR_SLIDER_MODE_START;
+    }
+
+    if(lv_streq(txt, "END")) {
+        return CIRCULAR_SLIDER_MODE_END;
+    }
+
+    if(lv_streq(txt, "FULL")) {
+        return CIRCULAR_SLIDER_MODE_FULL;
+    }
+
+    return CIRCULAR_SLIDER_MODE_START;
+}
+
 
 #endif /* LV_USE_XML */

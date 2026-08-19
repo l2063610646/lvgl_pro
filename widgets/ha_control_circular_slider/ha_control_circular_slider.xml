@@ -4,6 +4,11 @@
 	</previews>
 
 	<api>
+		<enumdef name="circular_slider_mode">
+			<enum name="START" value="0" />
+			<enum name="END" value="1" />
+			<enum name="FULL" value="2" />
+		</enumdef>
 		<prop name="current" type="int" default="40" />
 		<prop name="value" type="int" default="50" />
 		<prop name="low" type="int" default="20" />
@@ -13,6 +18,12 @@
 		<prop name="max" type="int" default="100" />
 		<prop name="step" type="int" default="1" />
 		<prop name="size" type="int" default="320" />
+		<prop name="low_color" type="color" />
+		<prop name="high_color" type="color" />
+		<prop name="active_color" type="color" />
+		<prop name="mode" type="enum:circular_slider_mode" default="START" />
+		<prop name="inactive" type="bool" default="0" />
+		<prop name="show_knob" type="bool" default="1" />
 	</api>
 
 	<styles>

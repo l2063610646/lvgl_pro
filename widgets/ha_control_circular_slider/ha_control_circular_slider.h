@@ -36,7 +36,6 @@ int32_t ha_control_circular_slider_get_value(lv_obj_t * ha_control_circular_slid
 int32_t ha_control_circular_slider_get_low(lv_obj_t * ha_control_circular_slider);
 int32_t ha_control_circular_slider_get_high(lv_obj_t * ha_control_circular_slider);
 void ha_control_circular_slider_set_range(lv_obj_t * ha_control_circular_slider, int32_t min, int32_t max);
-void ha_control_circular_slider_set_step(lv_obj_t * ha_control_circular_slider, int32_t step);
 
 /**********************
  *      MACROS
@@ -45,7 +44,7 @@ void ha_control_circular_slider_set_step(lv_obj_t * ha_control_circular_slider, 
 #define HA_CONTROL_CIRCULAR_SLIDER_USER_DATA \
     int32_t slider_step; \
     bool updating_low; \
-    bool updating_high;
+    bool updating_high; 
 
 #ifdef __cplusplus
 } /*extern "C"*/

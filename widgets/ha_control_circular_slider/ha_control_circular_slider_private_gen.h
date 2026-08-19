@@ -43,6 +43,12 @@ typedef struct {
     int32_t max;
     int32_t step;
     int32_t size;
+    lv_color_t low_color;
+    lv_color_t high_color;
+    lv_color_t active_color;
+    circular_slider_mode_t mode;
+    bool inactive;
+    bool show_knob;
     lv_obj_t * bg_arc;
     lv_obj_t * low_arc;
     lv_obj_t * low_active_arc;

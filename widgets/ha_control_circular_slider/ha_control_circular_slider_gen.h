@@ -31,6 +31,11 @@ extern "C" {
 /**********************
  *      TYPEDEFS
  **********************/
+typedef enum {
+    CIRCULAR_SLIDER_MODE_START = 0,
+    CIRCULAR_SLIDER_MODE_END = 1,
+    CIRCULAR_SLIDER_MODE_FULL = 2
+}circular_slider_mode_t;
 
 /**********************
  * GLOBAL PROTOTYPES
@@ -104,6 +109,48 @@ void ha_control_circular_slider_set_step(lv_obj_t * ha_control_circular_slider, 
  * @param size  size
  */
 void ha_control_circular_slider_set_size(lv_obj_t * ha_control_circular_slider, int32_t size);
+
+/**
+ * ha_control_circular_slider low_color
+ * @param obj   pointer to a ha_control_circular_slider
+ * @param low_color  low_color
+ */
+void ha_control_circular_slider_set_low_color(lv_obj_t * ha_control_circular_slider, lv_color_t low_color);
+
+/**
+ * ha_control_circular_slider high_color
+ * @param obj   pointer to a ha_control_circular_slider
+ * @param high_color  high_color
+ */
+void ha_control_circular_slider_set_high_color(lv_obj_t * ha_control_circular_slider, lv_color_t high_color);
+
+/**
+ * ha_control_circular_slider active_color
+ * @param obj   pointer to a ha_control_circular_slider
+ * @param active_color  active_color
+ */
+void ha_control_circular_slider_set_active_color(lv_obj_t * ha_control_circular_slider, lv_color_t active_color);
+
+/**
+ * ha_control_circular_slider mode
+ * @param obj   pointer to a ha_control_circular_slider
+ * @param mode  mode
+ */
+void ha_control_circular_slider_set_mode(lv_obj_t * ha_control_circular_slider, circular_slider_mode_t mode);
+
+/**
+ * ha_control_circular_slider inactive
+ * @param obj   pointer to a ha_control_circular_slider
+ * @param inactive  inactive
+ */
+void ha_control_circular_slider_set_inactive(lv_obj_t * ha_control_circular_slider, bool inactive);
+
+/**
+ * ha_control_circular_slider show_knob
+ * @param obj   pointer to a ha_control_circular_slider
+ * @param show_knob  show_knob
+ */
+void ha_control_circular_slider_set_show_knob(lv_obj_t * ha_control_circular_slider, bool show_knob);
 
 /**********************
  *      MACROS

@@ -148,20 +148,60 @@ void refresh_value_arcs(ha_control_circular_slider_t * root)
     int32_t low_angle = value_to_angle(root, target_low_val);
     int32_t high_angle = root->dual ? value_to_angle(root, root->high) : 270;
 
-    lv_arc_set_angles(root->low_arc, 0, clamp_i32(low_angle, 0, c_angle));
-    if(target_low_val <= root->current) {
-        lv_arc_set_angles(root->low_active_arc, 0, 0);
+    if (!root->dual) {
+        if (root->mode == CIRCULAR_SLIDER_MODE_FULL) {
+            lv_arc_set_angles(root->low_arc, 0, 270);
+            lv_arc_set_angles(root->low_active_arc, 0, 0);
+        } else if (root->mode == CIRCULAR_SLIDER_MODE_END) {
+            lv_arc_set_angles(root->low_arc, low_angle, 270);
+            if (target_low_val >= root->current) {
+                lv_arc_set_angles(root->low_active_arc, 0, 0);
+            } else {
+                lv_arc_set_angles(root->low_active_arc, clamp_i32(low_angle, 0, c_angle), c_angle);
+            }
+        } else {
+            lv_arc_set_angles(root->low_arc, 0, low_angle);
+            if (target_low_val <= root->current) {
+                lv_arc_set_angles(root->low_active_arc, 0, 0);
+            } else {
+                lv_arc_set_angles(root->low_active_arc, c_angle, clamp_i32(low_angle, c_angle, 270));
+            }
+        }
     } else {
-        lv_arc_set_angles(root->low_active_arc, c_angle, clamp_i32(low_angle, c_angle, high_angle));
-    }
+        lv_arc_set_angles(root->low_arc, 0, clamp_i32(low_angle, 0, c_angle));
+        if(target_low_val <= root->current) {
+            lv_arc_set_angles(root->low_active_arc, 0, 0);
+        } else {
+            lv_arc_set_angles(root->low_active_arc, c_angle, clamp_i32(low_angle, c_angle, high_angle));
+        }
 
-    if(root->dual) {
         lv_arc_set_angles(root->high_arc, clamp_i32(high_angle, c_angle, 270), 270);
         if(root->high > root->current) {
             lv_arc_set_angles(root->high_active_arc, 0, 0);
         } else {
             lv_arc_set_angles(root->high_active_arc, clamp_i32(high_angle, low_angle, c_angle), c_angle);
         }
+    }
+    
+    bool is_on_colored_arc = false;
+    if (root->dual) {
+        is_on_colored_arc = (root->current <= root->low) || (root->current >= root->high);
+    } else {
+        if (root->mode == CIRCULAR_SLIDER_MODE_FULL) {
+            is_on_colored_arc = true;
+        } else if (root->mode == CIRCULAR_SLIDER_MODE_END) {
+            is_on_colored_arc = (root->current >= root->value);
+        } else {
+            is_on_colored_arc = (root->current <= root->value);
+        }
+    }
+
+    if (is_on_colored_arc) {
+        lv_obj_set_style_bg_color(root->cur_dot_knob_arc, lv_color_hex(0xFFFFFF), LV_PART_KNOB);
+        lv_obj_set_style_bg_opa(root->cur_dot_knob_arc, LV_OPA_50, LV_PART_KNOB);
+    } else {
+        lv_obj_set_style_bg_color(root->cur_dot_knob_arc, lv_color_hex(0x212121), LV_PART_KNOB);
+        lv_obj_set_style_bg_opa(root->cur_dot_knob_arc, LV_OPA_50, LV_PART_KNOB);
     }
 }
 
@@ -193,8 +233,7 @@ void touch_event_cb(lv_event_t * e)
         root->updating_low = choose_low;
         root->updating_high = !choose_low;
     } else if (code == LV_EVENT_VALUE_CHANGED) {
-        int32_t t_value = lv_arc_get_value(root->touch_arc);       
-        int32_t c_angle = value_to_angle(root, root->current);
+        int32_t t_value = lv_arc_get_value(root->touch_arc);
         ha_control_circular_slider_value_changed_event_t value_changed_event;
         bool value_changed = false;
 
@@ -202,8 +241,6 @@ void touch_event_cb(lv_event_t * e)
             int32_t low_max = root->dual ? root->high : root->max;
             t_value = snap_value_to_step(root, t_value, root->min, low_max);
             int32_t old_value = root->dual ? root->low : root->value;
-            int32_t t_angle = value_to_angle(root, t_value);
-            int32_t high_knob_angle = root->dual ? value_to_angle(root, root->high) : 270;
 
             if(root->dual) {
                 root->low = t_value;
@@ -212,49 +249,25 @@ void touch_event_cb(lv_event_t * e)
             }
             lv_arc_set_value(root->low_dot_knob_arc, t_value);
             apply_touch_arc_value(root, t_value);
-            
-            // low_arc
-            lv_arc_set_angles(root->low_arc, 0, clamp_i32(t_angle, 0, c_angle));
-            // low_active_arc
-            if (t_value <= root->current) {
-                lv_arc_set_angles(root->low_active_arc, 0, 0);
-            } else {
-                lv_arc_set_angles(root->low_active_arc, c_angle, clamp_i32(t_angle, c_angle, high_knob_angle));
-            }
+
             value_changed = old_value != t_value;
             value_changed_event.value = t_value;
             value_changed_event.is_low = true;
         } else if (root->dual && root->updating_high) {
             t_value = snap_value_to_step(root, t_value, root->low, root->max);
             int32_t old_value = root->high;
-            int32_t t_angle = value_to_angle(root, t_value);
-            int32_t low_knob_angle = value_to_angle(root, root->low);
 
             root->high = t_value;
             lv_arc_set_value(root->high_dot_knob_arc, t_value);
             apply_touch_arc_value(root, t_value);
 
-            // high_arc
-            lv_arc_set_angles(root->high_arc, clamp_i32(t_angle, c_angle, 270), 270);
-            // high_active_arc
-            if (t_value > root->current) {
-                lv_arc_set_angles(root->high_active_arc, 0, 0);
-            } else {
-                lv_arc_set_angles(root->high_active_arc, clamp_i32(t_angle, low_knob_angle, c_angle), c_angle);
-            }
             value_changed = old_value != t_value;
             value_changed_event.value = t_value;
             value_changed_event.is_low = false;
         }
 
-        int32_t cur_low_val = root->dual ? root->low : root->value;
-        if (cur_low_val >= root->current || (root->dual && root->high <= root->current)) {
-            lv_obj_set_style_bg_color(root->cur_dot_knob_arc, lv_color_hex(0xFFFFFF), LV_PART_KNOB);
-            lv_obj_set_style_bg_opa(root->cur_dot_knob_arc, LV_OPA_50, LV_PART_KNOB);
-        } else {
-            lv_obj_set_style_bg_color(root->cur_dot_knob_arc, lv_color_hex(0x212121), LV_PART_KNOB);
-            lv_obj_set_style_bg_opa(root->cur_dot_knob_arc, LV_OPA_50, LV_PART_KNOB);
-        }
+        refresh_value_arcs(root);
+
 
         if(value_changed) {
             lv_obj_send_event((lv_obj_t *)root, LV_EVENT_VALUE_CHANGED, &value_changed_event);
@@ -447,6 +460,83 @@ void ha_control_circular_slider_set_size(lv_obj_t * ha_control_circular_slider, 
     lv_obj_set_style_width(root->touch_arc, knob_size, LV_PART_KNOB);
     lv_obj_set_style_height(root->touch_arc, knob_size, LV_PART_KNOB);
     lv_obj_set_ext_click_area(root->touch_arc, ext_click);
+}
+
+
+void ha_control_circular_slider_set_low_color(lv_obj_t * ha_control_circular_slider, lv_color_t color)
+{
+    ha_control_circular_slider_t * root = (ha_control_circular_slider_t *) ha_control_circular_slider;
+    if (root != NULL) {
+        if (root->low_arc != NULL) {
+            lv_obj_set_style_arc_color(root->low_arc, color, LV_PART_INDICATOR);
+            lv_obj_set_style_arc_opa(root->low_arc, (255 * 50 / 100), LV_PART_INDICATOR);
+        }
+        if (root->low_active_arc != NULL) {
+            lv_obj_set_style_arc_color(root->low_active_arc, color, LV_PART_INDICATOR);
+            lv_obj_set_style_arc_opa(root->low_active_arc, LV_OPA_COVER, LV_PART_INDICATOR);
+        }
+    }
+}
+
+void ha_control_circular_slider_set_high_color(lv_obj_t * ha_control_circular_slider, lv_color_t color)
+{
+    ha_control_circular_slider_t * root = (ha_control_circular_slider_t *) ha_control_circular_slider;
+    if (root != NULL) {
+        if (root->high_arc != NULL) {
+            lv_obj_set_style_arc_color(root->high_arc, color, LV_PART_INDICATOR);
+            lv_obj_set_style_arc_opa(root->high_arc, (255 * 50 / 100), LV_PART_INDICATOR);
+        }
+        if (root->high_active_arc != NULL) {
+            lv_obj_set_style_arc_color(root->high_active_arc, color, LV_PART_INDICATOR);
+            lv_obj_set_style_arc_opa(root->high_active_arc, LV_OPA_COVER, LV_PART_INDICATOR);
+        }
+    }
+}
+
+void ha_control_circular_slider_set_active_color(lv_obj_t * ha_control_circular_slider, lv_color_t color)
+{
+    ha_control_circular_slider_set_low_color(ha_control_circular_slider, color);
+}
+
+void ha_control_circular_slider_set_inactive(lv_obj_t * ha_control_circular_slider, bool inactive)
+{
+    ha_control_circular_slider_t * root = (ha_control_circular_slider_t *) ha_control_circular_slider;
+    if (root != NULL) {
+        if (inactive) {
+            if (root->low_arc) lv_obj_set_style_arc_opa(root->low_arc, (255 * 20 / 100), LV_PART_INDICATOR);
+            if (root->low_active_arc) lv_obj_set_style_arc_opa(root->low_active_arc, (255 * 20 / 100), LV_PART_INDICATOR);
+            if (root->high_arc) lv_obj_set_style_arc_opa(root->high_arc, (255 * 20 / 100), LV_PART_INDICATOR);
+            if (root->high_active_arc) lv_obj_set_style_arc_opa(root->high_active_arc, (255 * 20 / 100), LV_PART_INDICATOR);
+        } else {
+            if (root->low_arc) lv_obj_set_style_arc_opa(root->low_arc, (255 * 50 / 100), LV_PART_INDICATOR);
+            if (root->low_active_arc) lv_obj_set_style_arc_opa(root->low_active_arc, LV_OPA_COVER, LV_PART_INDICATOR);
+            if (root->high_arc) lv_obj_set_style_arc_opa(root->high_arc, (255 * 50 / 100), LV_PART_INDICATOR);
+            if (root->high_active_arc) lv_obj_set_style_arc_opa(root->high_active_arc, LV_OPA_COVER, LV_PART_INDICATOR);
+        }
+    }
+}
+
+void ha_control_circular_slider_set_mode(lv_obj_t * ha_control_circular_slider, circular_slider_mode_t mode)
+{
+    ha_control_circular_slider_t * root = (ha_control_circular_slider_t *) ha_control_circular_slider;
+    if (root != NULL) {
+        root->mode = mode;
+        refresh_value_arcs(root);
+    }
+}
+
+void ha_control_circular_slider_set_show_knob(lv_obj_t * ha_control_circular_slider, bool show_knob)
+{
+    ha_control_circular_slider_t * root = (ha_control_circular_slider_t *) ha_control_circular_slider;
+    if (root != NULL) {
+        if (show_knob) {
+            if (root->low_dot_knob_arc) lv_obj_remove_flag(root->low_dot_knob_arc, LV_OBJ_FLAG_HIDDEN);
+            if (root->dual && root->high_dot_knob_arc) lv_obj_remove_flag(root->high_dot_knob_arc, LV_OBJ_FLAG_HIDDEN);
+        } else {
+            if (root->low_dot_knob_arc) lv_obj_add_flag(root->low_dot_knob_arc, LV_OBJ_FLAG_HIDDEN);
+            if (root->high_dot_knob_arc) lv_obj_add_flag(root->high_dot_knob_arc, LV_OBJ_FLAG_HIDDEN);
+        }
+    }
 }
 
 /**********************
