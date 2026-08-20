@@ -13,6 +13,9 @@
 		<prop name="unit" type="string" />
 		<prop name="unit_position" type="enum:unit_position_def" default="HA_BIG_NUMBER_UNIT_BOTTOM" />
 		<prop name="text_color" type="color" />
+		<prop name="integer_label_text_font" type="font" />
+		<prop name="decimal_label_text_font" type="font" />
+		<prop name="unit_label_text_font" type="font" />
 	</api>
 
 	<styles>
@@ -25,13 +28,13 @@
 			flex_cross_place="end"
 			flex_track_place="start"
 			width="content"
-			height="50"
+			height="content"
 		/>
-		<style name="style_addon" width="content" height="50" pad_top="10" pad_bottom="10" layout="flex" />
+		<style name="style_addon" width="content" height="content" pad_top="0" pad_bottom="0" layout="flex" />
 		<style
 			name="style_addon_top"
 			flex_flow="column_reverse"
-			flex_main_place="center"
+			flex_main_place="start"
 			flex_cross_place="start"
 			flex_track_place="end"
 		/>

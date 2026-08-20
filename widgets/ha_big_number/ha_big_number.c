@@ -41,7 +41,7 @@ static void ha_big_number_refresh(lv_obj_t * obj);
 
 void ha_big_number_constructor_hook(lv_obj_t * obj)
 {
-
+    ha_big_number_refresh(obj);
 }
 
 void ha_big_number_destructor_hook(lv_obj_t * obj)
@@ -86,6 +86,30 @@ void ha_big_number_set_text_color(lv_obj_t * obj, lv_color_t text_color)
     ha_big_number_t * widget = (ha_big_number_t *)obj;
     widget->text_color = text_color;
     ha_big_number_refresh(obj);
+}
+
+void ha_big_number_set_integer_label_text_font(lv_obj_t * obj, lv_font_t * font)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    if(font != NULL) {
+        lv_obj_set_style_text_font(widget->integer_label, font, LV_PART_MAIN);
+    }
+}
+
+void ha_big_number_set_decimal_label_text_font(lv_obj_t * obj, lv_font_t * font)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    if(font != NULL) {
+        lv_obj_set_style_text_font(widget->decimal_label, font, LV_PART_MAIN);
+    }
+}
+
+void ha_big_number_set_unit_label_text_font(lv_obj_t * obj, lv_font_t * font)
+{
+    ha_big_number_t * widget = (ha_big_number_t *)obj;
+    if(font != NULL) {
+        lv_obj_set_style_text_font(widget->unit_label, font, LV_PART_MAIN);
+    }
 }
 
 /**********************
@@ -149,14 +173,41 @@ static void ha_big_number_refresh(lv_obj_t * obj)
     lv_label_set_text(widget->integer_label, integer_str);
     lv_label_set_text(widget->decimal_label, decimal_str);
 
+    /* 动态计算字体文本基线差 (Font Baseline Offset) */
+    const lv_font_t * font_int = lv_obj_get_style_text_font(widget->integer_label, 0);
+    const lv_font_t * font_dec = lv_obj_get_style_text_font(widget->decimal_label, 0);
+    const lv_font_t * font_unit = lv_obj_get_style_text_font(widget->unit_label, 0);
+
+    int32_t baseline_offset = 0;
+    if (font_int) {
+        int32_t target_base_line = 0;
+        if (widget->unit_position == UNIT_POSITION_DEF_HA_BIG_NUMBER_UNIT_BOTTOM) {
+            target_base_line = (widget->decimal_places > 0 && font_dec) ? font_dec->base_line : (font_unit ? font_unit->base_line : 0);
+        } else {
+            target_base_line = font_dec ? font_dec->base_line : 0;
+        }
+        baseline_offset = font_int->base_line - target_base_line;
+        if (baseline_offset < 0) baseline_offset = 0;
+    }
+
     if (widget->unit_position == UNIT_POSITION_DEF_HA_BIG_NUMBER_UNIT_BOTTOM) {
         lv_obj_set_flex_flow(widget->addon, LV_FLEX_FLOW_ROW);
         lv_obj_set_flex_align(widget->addon, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END, LV_FLEX_ALIGN_END);
         lv_obj_set_style_pad_gap(widget->addon, 2, 0);
+        lv_obj_set_style_pad_bottom(widget->addon, baseline_offset, 0);
+        lv_obj_set_style_min_height(widget->decimal_label, 0, 0);
     } else {
         lv_obj_set_flex_flow(widget->addon, LV_FLEX_FLOW_COLUMN_REVERSE);
-        lv_obj_set_flex_align(widget->addon, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END);
+        lv_obj_set_flex_align(widget->addon, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_END);
         lv_obj_set_style_pad_gap(widget->addon, 0, 0);
+        lv_obj_set_style_pad_bottom(widget->addon, baseline_offset, 0);
+
+        /* 对标 TS 源码 .decimal { min-height: 1.33em }：无小数时保留行高占位，防止右上角单位塌陷 */
+        if (widget->decimal_places == 0 && font_dec) {
+            lv_obj_set_style_min_height(widget->decimal_label, font_dec->line_height, 0);
+        } else {
+            lv_obj_set_style_min_height(widget->decimal_label, 0, 0);
+        }
     }
 
     lv_obj_set_style_text_color(widget->integer_label, widget->text_color, 0);

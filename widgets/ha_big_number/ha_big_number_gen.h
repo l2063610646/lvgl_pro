@@ -81,6 +81,27 @@ void ha_big_number_set_unit_position(lv_obj_t * ha_big_number, unit_position_def
  */
 void ha_big_number_set_text_color(lv_obj_t * ha_big_number, lv_color_t text_color);
 
+/**
+ * ha_big_number integer_label_text_font
+ * @param obj   pointer to a ha_big_number
+ * @param integer_label_text_font  integer_label_text_font
+ */
+void ha_big_number_set_integer_label_text_font(lv_obj_t * ha_big_number, lv_font_t * integer_label_text_font);
+
+/**
+ * ha_big_number decimal_label_text_font
+ * @param obj   pointer to a ha_big_number
+ * @param decimal_label_text_font  decimal_label_text_font
+ */
+void ha_big_number_set_decimal_label_text_font(lv_obj_t * ha_big_number, lv_font_t * decimal_label_text_font);
+
+/**
+ * ha_big_number unit_label_text_font
+ * @param obj   pointer to a ha_big_number
+ * @param unit_label_text_font  unit_label_text_font
+ */
+void ha_big_number_set_unit_label_text_font(lv_obj_t * ha_big_number, lv_font_t * unit_label_text_font);
+
 /**********************
  *      MACROS
  **********************/

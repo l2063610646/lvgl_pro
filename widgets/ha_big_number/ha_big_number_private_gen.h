@@ -39,6 +39,9 @@ typedef struct {
     const char * unit;
     unit_position_def_t unit_position;
     lv_color_t text_color;
+    lv_font_t * integer_label_text_font;
+    lv_font_t * decimal_label_text_font;
+    lv_font_t * unit_label_text_font;
     lv_obj_t * integer_label;
     lv_obj_t * addon;
     lv_obj_t * decimal_label;
