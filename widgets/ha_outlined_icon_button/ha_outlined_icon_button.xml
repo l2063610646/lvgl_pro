@@ -1,0 +1,42 @@
+<widget>
+	<previews>
+		<preview width="120" height="120" style_bg_color="0x265780" />
+	</previews>
+
+	<api>
+		<prop name="size" type="int" default="48" help="Button diameter size" />
+		<prop name="icon_size" type="int" default="24" help="Icon font size" />
+		<prop name="symbol" type="string" default="" help="Icon symbol" />
+		<prop name="outline_color" type="color" default="0x5e5e5e" help="Outline border color" />
+		<prop name="text_color" type="color" default="0x5e5e5e" help="Icon text color" />
+		<prop name="disabled" type="bool" default="false" help="Disabled state" />
+		<prop name="no_ripple" type="bool" default="false" help="Disable ripple effect" />
+	</api>
+
+	<styles>
+		<style
+			name="style_base"
+			radius="9999"
+			border_width="1"
+			border_color="0x5e5e5e"
+			bg_opa="0%"
+			pad_all="0"
+			layout="flex"
+			flex_flow="row"
+			flex_main_place="center"
+			flex_cross_place="center"
+			flex_track_place="center"
+			width="48"
+			height="48"
+			clip_corner="true"
+		/>
+	</styles>
+
+	<view name="main" extends="lv_obj" scrollable="false" clickable="true">
+		<remove_style_all />
+		<style name="style_base" />
+
+		<ha_ripple name="ripple" p_color="0x5e5e5e" p_pressed_opacity="20" p_radius="9999" />
+		<mdi_icon name="icon" size="24" symbol="" />
+	</view>
+</widget>
