@@ -1,0 +1,58 @@
+<widget>
+	<previews>
+		<preview width="240" height="60" style_bg_color="0x212121" />
+	</previews>
+
+	<api>
+		<prop name="value" type="string" default="" help="Selected value" />
+		<prop name="options" type="string" default="" help="Semicolon-separated options (value,label,symbol or just values)" />
+		<prop name="label" type="string" default="" help="Control label" />
+		<prop name="disabled" type="bool" default="false" help="Disabled state" />
+		<prop name="vertical" type="bool" default="false" help="Vertical layout orientation" />
+		<prop name="hide_option_label" type="bool" default="false" help="Hide text labels in options" />
+		<prop name="color" type="color" default="0x2196f3" help="Selected option highlight color" />
+		<prop name="height" type="px" default="40" help="Height of the control" />
+	</api>
+
+	<styles>
+		<style
+			name="style_base"
+			width="100%"
+			height="40"
+			bg_opa="0%"
+			pad_all="0"
+			border_width="0"
+		/>
+		<style
+			name="style_row"
+			width="100%"
+			height="100%"
+			radius="10"
+			bg_color="0x727272"
+			bg_opa="20%"
+			pad_all="4"
+			layout="flex"
+			flex_flow="row"
+			flex_main_place="center"
+			flex_cross_place="center"
+			flex_track_place="center"
+			pad_column="4"
+			pad_row="4"
+			clip_corner="true"
+		/>
+	</styles>
+
+	<view
+		name="main"
+		extends="lv_obj"
+		scrollable="false"
+	>
+		<remove_style_all />
+		<style name="style_base" />
+
+		<lv_obj name="row" scrollable="false">
+			<remove_style_all />
+			<style name="style_row" />
+		</lv_obj>
+	</view>
+</widget>
