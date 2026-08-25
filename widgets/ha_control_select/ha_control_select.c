@@ -16,10 +16,10 @@
  *      DEFINES
  *********************/
 
-#define DEFAULT_HEIGHT       40
-#define DEFAULT_RADIUS       10
+#define DEFAULT_HEIGHT       44
+#define DEFAULT_RADIUS       12
 #define DEFAULT_PAD          4
-#define BUTTON_RADIUS        6
+#define BUTTON_RADIUS        8
 
 /**********************
  *      TYPEDEFS
@@ -29,10 +29,10 @@
  *  STATIC PROTOTYPES
  **********************/
 
-static void update_button_styles(ha_control_select_t * st);
+static void rebuild_map(ha_control_select_t * st);
+static void update_styles(ha_control_select_t * st);
 static void clear_options(ha_control_select_t * st);
-static void relayout(ha_control_select_t * st);
-static void button_click_cb(lv_event_t * e);
+static void buttonmatrix_value_changed_cb(lv_event_t * e);
 
 /**********************
  *  STATIC VARIABLES
@@ -50,24 +50,48 @@ void ha_control_select_constructor_hook(lv_obj_t * obj)
 {
     ha_control_select_t * st = (ha_control_select_t *)obj;
     if(st != NULL) {
-        st->buttons = NULL;
         st->options_data = NULL;
+        st->map = NULL;
         st->option_count = 0;
         st->selected_value[0] = '\0';
-        st->color = lv_color_hex(0x2196f3);
+        st->color = lv_color_hex(0xFF6F22);
         st->height = DEFAULT_HEIGHT;
         st->disabled = false;
         st->vertical = false;
         st->hide_option_label = false;
 
-        if(st->row != NULL) {
-            lv_obj_set_style_radius(st->row, DEFAULT_RADIUS, 0);
-            lv_obj_set_style_bg_color(st->row, lv_color_hex(0x727272), 0);
-            lv_obj_set_style_bg_opa(st->row, (255 * 20 / 100), 0);
-            lv_obj_set_style_pad_all(st->row, DEFAULT_PAD, 0);
-            lv_obj_set_style_pad_column(st->row, DEFAULT_PAD, 0);
-            lv_obj_set_style_pad_row(st->row, DEFAULT_PAD, 0);
-        }
+        /* Set base container styles (LV_PART_MAIN) */
+        lv_obj_set_style_radius(obj, DEFAULT_RADIUS, LV_PART_MAIN);
+        lv_obj_set_style_bg_color(obj, lv_color_hex(0x727272), LV_PART_MAIN);
+        lv_obj_set_style_bg_opa(obj, (255 * 18 / 100), LV_PART_MAIN);
+        lv_obj_set_style_pad_all(obj, DEFAULT_PAD, LV_PART_MAIN);
+        lv_obj_set_style_pad_column(obj, DEFAULT_PAD, LV_PART_MAIN);
+        lv_obj_set_style_pad_row(obj, DEFAULT_PAD, LV_PART_MAIN);
+        lv_obj_set_style_border_width(obj, 0, LV_PART_MAIN);
+        lv_obj_set_style_clip_corner(obj, true, LV_PART_MAIN);
+
+        /* Set unselected item styles (LV_PART_ITEMS) */
+        lv_obj_set_style_radius(obj, BUTTON_RADIUS, LV_PART_ITEMS);
+        lv_obj_set_style_bg_opa(obj, LV_OPA_0, LV_PART_ITEMS);
+        lv_obj_set_style_border_width(obj, 0, LV_PART_ITEMS);
+        lv_obj_set_style_text_color(obj, lv_color_hex(0x141414), LV_PART_ITEMS);
+        const lv_font_t * font = mdi_icon_font24_4 ? mdi_icon_font24_4 : (mdi_icon_font18_4 ? mdi_icon_font18_4 : LV_FONT_DEFAULT);
+        lv_obj_set_style_text_font(obj, font, LV_PART_ITEMS);
+
+        /* Set selected item styles (LV_PART_ITEMS | LV_STATE_CHECKED) */
+        lv_obj_set_style_radius(obj, BUTTON_RADIUS, LV_PART_ITEMS | LV_STATE_CHECKED);
+        lv_obj_set_style_bg_color(obj, st->color, LV_PART_ITEMS | LV_STATE_CHECKED);
+        lv_obj_set_style_bg_opa(obj, LV_OPA_COVER, LV_PART_ITEMS | LV_STATE_CHECKED);
+        lv_obj_set_style_text_color(obj, lv_color_hex(0xFFFFFF), LV_PART_ITEMS | LV_STATE_CHECKED);
+        lv_obj_set_style_border_width(obj, 0, LV_PART_ITEMS | LV_STATE_CHECKED);
+
+        /* Set pressed item styles */
+        lv_obj_set_style_radius(obj, BUTTON_RADIUS, LV_PART_ITEMS | LV_STATE_PRESSED);
+        lv_obj_set_style_bg_color(obj, st->color, LV_PART_ITEMS | LV_STATE_PRESSED);
+        lv_obj_set_style_bg_opa(obj, (255 * 25 / 100), LV_PART_ITEMS | LV_STATE_PRESSED);
+
+        lv_buttonmatrix_set_one_checked(obj, true);
+        lv_obj_add_event_cb(obj, buttonmatrix_value_changed_cb, LV_EVENT_VALUE_CHANGED, NULL);
     }
 }
 
@@ -87,69 +111,29 @@ void ha_control_select_event_hook(lv_event_t * e)
 void ha_control_select_set_options_array(lv_obj_t * obj, const ha_control_select_option_t * options, uint32_t count)
 {
     ha_control_select_t * st = (ha_control_select_t *)obj;
-    if(st == NULL || st->row == NULL) return;
+    if(st == NULL) return;
 
     clear_options(st);
     if(options == NULL || count == 0) return;
 
     st->options_data = lv_malloc(sizeof(ha_control_select_option_store_t) * count);
-    st->buttons = lv_malloc(sizeof(lv_obj_t *) * count);
     LV_ASSERT_MALLOC(st->options_data);
-    LV_ASSERT_MALLOC(st->buttons);
-    if(st->options_data == NULL || st->buttons == NULL) {
-        clear_options(st);
-        return;
-    }
-    memset(st->buttons, 0, sizeof(lv_obj_t *) * count);
+    if(st->options_data == NULL) return;
+
     st->option_count = count;
 
     for(uint32_t i = 0; i < count; i++) {
         lv_strlcpy(st->options_data[i].value, options[i].value ? options[i].value : "", sizeof(st->options_data[i].value));
         lv_strlcpy(st->options_data[i].label, options[i].label ? options[i].label : st->options_data[i].value, sizeof(st->options_data[i].label));
         lv_strlcpy(st->options_data[i].symbol, options[i].symbol ? options[i].symbol : "", sizeof(st->options_data[i].symbol));
-
-        lv_obj_t * btn = lv_button_create(st->row);
-        lv_obj_remove_style_all(btn);
-        lv_obj_set_flex_grow(btn, 1);
-        if(st->vertical) {
-            lv_obj_set_width(btn, LV_PCT(100));
-        } else {
-            lv_obj_set_height(btn, LV_PCT(100));
-        }
-        lv_obj_set_flex_flow(btn, LV_FLEX_FLOW_COLUMN);
-        lv_obj_set_flex_align(btn, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-        lv_obj_set_style_radius(btn, BUTTON_RADIUS, 0);
-        lv_obj_set_style_pad_all(btn, 2, 0);
-        lv_obj_set_style_pad_gap(btn, 2, 0);
-        lv_obj_set_user_data(btn, (void *)(uintptr_t)i);
-        lv_obj_add_event_cb(btn, button_click_cb, LV_EVENT_CLICKED, obj);
-
-        if(st->options_data[i].symbol[0] != '\0') {
-            lv_obj_t * symbol = lv_label_create(btn);
-            lv_label_set_text(symbol, st->options_data[i].symbol);
-            lv_obj_set_style_text_font(symbol, mdi_icon_font18_4 ? mdi_icon_font18_4 : LV_FONT_DEFAULT, 0);
-            lv_obj_remove_flag(symbol, LV_OBJ_FLAG_CLICKABLE);
-        }
-        if(st->options_data[i].label[0] != '\0') {
-            lv_obj_t * label = lv_label_create(btn);
-            lv_label_set_text(label, st->options_data[i].label);
-            lv_obj_set_style_text_font(label, roboto_regular_12_4 ? roboto_regular_12_4 : LV_FONT_DEFAULT, 0);
-            lv_label_set_long_mode(label, LV_LABEL_LONG_DOT);
-            lv_obj_set_width(label, LV_PCT(100));
-            lv_obj_set_style_text_align(label, LV_TEXT_ALIGN_CENTER, 0);
-            lv_obj_remove_flag(label, LV_OBJ_FLAG_CLICKABLE);
-            if(st->hide_option_label) {
-                lv_obj_add_flag(label, LV_OBJ_FLAG_HIDDEN);
-            }
-        }
-        st->buttons[i] = btn;
     }
 
     if(st->selected_value[0] == '\0' && count > 0) {
         lv_strlcpy(st->selected_value, st->options_data[0].value, sizeof(st->selected_value));
         st->value = st->selected_value;
     }
-    update_button_styles(st);
+
+    rebuild_map(st);
 }
 
 void ha_control_select_set_options(lv_obj_t * obj, const char * options_str)
@@ -214,7 +198,16 @@ void ha_control_select_set_value(lv_obj_t * obj, const char * value)
     if(st == NULL) return;
     lv_strlcpy(st->selected_value, value ? value : "", sizeof(st->selected_value));
     st->value = st->selected_value;
-    update_button_styles(st);
+
+    if(st->options_data != NULL) {
+        for(uint32_t i = 0; i < st->option_count; i++) {
+            if(strcmp(st->options_data[i].value, st->selected_value) == 0) {
+                lv_buttonmatrix_set_button_ctrl(obj, i, LV_BUTTONMATRIX_CTRL_CHECKED);
+            } else {
+                lv_buttonmatrix_clear_button_ctrl(obj, i, LV_BUTTONMATRIX_CTRL_CHECKED);
+            }
+        }
+    }
 }
 
 void ha_control_select_set_label(lv_obj_t * obj, const char * label)
@@ -229,7 +222,7 @@ void ha_control_select_set_disabled(lv_obj_t * obj, bool disabled)
     ha_control_select_t * st = (ha_control_select_t *)obj;
     if(st == NULL) return;
     st->disabled = disabled;
-    update_button_styles(st);
+    update_styles(st);
 }
 
 void ha_control_select_set_vertical(lv_obj_t * obj, bool vertical)
@@ -237,7 +230,7 @@ void ha_control_select_set_vertical(lv_obj_t * obj, bool vertical)
     ha_control_select_t * st = (ha_control_select_t *)obj;
     if(st == NULL) return;
     st->vertical = vertical;
-    relayout(st);
+    rebuild_map(st);
 }
 
 void ha_control_select_set_hide_option_label(lv_obj_t * obj, bool hide_option_label)
@@ -245,26 +238,7 @@ void ha_control_select_set_hide_option_label(lv_obj_t * obj, bool hide_option_la
     ha_control_select_t * st = (ha_control_select_t *)obj;
     if(st == NULL) return;
     st->hide_option_label = hide_option_label;
-
-    if(st->buttons != NULL) {
-        for(uint32_t i = 0; i < st->option_count; i++) {
-            lv_obj_t * btn = st->buttons[i];
-            if(btn == NULL) continue;
-            uint32_t child_cnt = lv_obj_get_child_count(btn);
-            for(uint32_t c = 0; c < child_cnt; c++) {
-                lv_obj_t * child = lv_obj_get_child(btn, c);
-                if(st->options_data[i].symbol[0] != '\0' && c == 0) {
-                    /* First child is symbol icon, keep visible */
-                    continue;
-                }
-                if(hide_option_label) {
-                    lv_obj_add_flag(child, LV_OBJ_FLAG_HIDDEN);
-                } else {
-                    lv_obj_clear_flag(child, LV_OBJ_FLAG_HIDDEN);
-                }
-            }
-        }
-    }
+    rebuild_map(st);
 }
 
 void ha_control_select_set_color(lv_obj_t * obj, lv_color_t color)
@@ -272,15 +246,15 @@ void ha_control_select_set_color(lv_obj_t * obj, lv_color_t color)
     ha_control_select_t * st = (ha_control_select_t *)obj;
     if(st == NULL) return;
     st->color = color;
-    update_button_styles(st);
+    update_styles(st);
 }
 
-void ha_control_select_set_height(lv_obj_t * obj, lv_coord_t height)
+void ha_control_select_set_height(lv_obj_t * obj, int32_t height)
 {
     ha_control_select_t * st = (ha_control_select_t *)obj;
     if(st == NULL) return;
     st->height = height;
-    relayout(st);
+    lv_obj_set_height(obj, height > 0 ? height : DEFAULT_HEIGHT);
 }
 
 const char * ha_control_select_get_value(lv_obj_t * obj)
@@ -322,68 +296,92 @@ bool ha_control_select_get_hide_option_label(lv_obj_t * obj)
 lv_color_t ha_control_select_get_color(lv_obj_t * obj)
 {
     ha_control_select_t * st = (ha_control_select_t *)obj;
-    return st ? st->color : lv_color_hex(0x2196f3);
+    return st ? st->color : lv_color_hex(0xFF6F22);
 }
 
 /**********************
  *   STATIC FUNCTIONS
  **********************/
 
-static void update_button_styles(ha_control_select_t * st)
+static void rebuild_map(ha_control_select_t * st)
 {
-    if(st == NULL || st->buttons == NULL || st->options_data == NULL) return;
+    if(st == NULL || st->options_data == NULL || st->option_count == 0) return;
+    lv_obj_t * obj = (lv_obj_t *)st;
 
-    for(uint32_t i = 0; i < st->option_count; i++) {
-        lv_obj_t * btn = st->buttons[i];
-        if(btn == NULL) continue;
-        bool selected = (strcmp(st->options_data[i].value, st->selected_value) == 0);
+    if(st->map != NULL) {
+        lv_free(st->map);
+        st->map = NULL;
+    }
 
-        lv_obj_set_style_radius(btn, BUTTON_RADIUS, 0);
-        lv_obj_set_style_border_width(btn, 0, 0);
-        lv_obj_set_style_bg_color(btn, selected ? st->color : lv_color_hex(0x727272), 0);
-        lv_obj_set_style_bg_opa(btn, selected ? LV_OPA_COVER : LV_OPA_0, 0);
-        lv_obj_set_style_text_color(btn, selected ? lv_color_hex(0xffffff) : lv_color_hex(0x141414), 0);
+    uint32_t count = st->option_count;
+    uint32_t map_slots = st->vertical ? (count * 2 + 1) : (count + 1);
+    st->map = lv_malloc(sizeof(char *) * map_slots);
+    LV_ASSERT_MALLOC(st->map);
+    if(st->map == NULL) return;
 
-        if(st->disabled) {
-            lv_obj_add_state(btn, LV_STATE_DISABLED);
-            lv_obj_clear_flag(btn, LV_OBJ_FLAG_CLICKABLE);
-            lv_obj_set_style_opa(btn, LV_OPA_40, 0);
+    uint32_t m = 0;
+    for(uint32_t i = 0; i < count; i++) {
+        if(st->hide_option_label) {
+            /* Pure symbol mode (or label if symbol is absent) */
+            st->map[m++] = (st->options_data[i].symbol[0] != '\0') ? st->options_data[i].symbol : st->options_data[i].label;
+        } else if(st->options_data[i].symbol[0] != '\0' && st->options_data[i].label[0] != '\0') {
+            /* Two lines: Symbol on top, Label on bottom */
+            lv_snprintf(st->options_data[i].display_text, sizeof(st->options_data[i].display_text),
+                        "%s\n%s", st->options_data[i].symbol, st->options_data[i].label);
+            st->map[m++] = st->options_data[i].display_text;
+        } else if(st->options_data[i].symbol[0] != '\0') {
+            st->map[m++] = st->options_data[i].symbol;
         } else {
-            lv_obj_remove_state(btn, LV_STATE_DISABLED);
-            lv_obj_add_flag(btn, LV_OBJ_FLAG_CLICKABLE);
-            lv_obj_set_style_opa(btn, LV_OPA_COVER, 0);
+            st->map[m++] = st->options_data[i].label;
+        }
+
+        if(st->vertical && i < count - 1) {
+            st->map[m++] = "\n";
         }
     }
+    st->map[m] = "";
+
+    lv_buttonmatrix_set_map(obj, st->map);
+    lv_buttonmatrix_set_button_ctrl_all(obj, LV_BUTTONMATRIX_CTRL_CHECKABLE);
+
+    /* Highlight current active value */
+    for(uint32_t i = 0; i < count; i++) {
+        if(strcmp(st->options_data[i].value, st->selected_value) == 0) {
+            lv_buttonmatrix_set_button_ctrl(obj, i, LV_BUTTONMATRIX_CTRL_CHECKED);
+        } else {
+            lv_buttonmatrix_clear_button_ctrl(obj, i, LV_BUTTONMATRIX_CTRL_CHECKED);
+        }
+    }
+
+    update_styles(st);
 }
 
-static void button_click_cb(lv_event_t * e)
+static void update_styles(ha_control_select_t * st)
 {
-    lv_obj_t * btn = lv_event_get_target(e);
-    lv_obj_t * obj = (lv_obj_t *)lv_event_get_user_data(e);
-    ha_control_select_t * st = (ha_control_select_t *)obj;
-    if(st == NULL || st->disabled || st->options_data == NULL) return;
+    if(st == NULL) return;
+    lv_obj_t * obj = (lv_obj_t *)st;
 
-    uint32_t idx = (uint32_t)(uintptr_t)lv_obj_get_user_data(btn);
-    if(idx >= st->option_count) return;
-    if(strcmp(st->selected_value, st->options_data[idx].value) == 0) return;
+    /* Update selected item style */
+    lv_obj_set_style_bg_color(obj, st->color, LV_PART_ITEMS | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(obj, st->color, LV_PART_ITEMS | LV_STATE_PRESSED);
 
-    lv_strlcpy(st->selected_value, st->options_data[idx].value, sizeof(st->selected_value));
-    st->value = st->selected_value;
-    update_button_styles(st);
-    lv_obj_send_event(obj, LV_EVENT_VALUE_CHANGED, (void *)st->selected_value);
+    if(st->disabled) {
+        lv_obj_add_state(obj, LV_STATE_DISABLED);
+        lv_obj_clear_flag(obj, LV_OBJ_FLAG_CLICKABLE);
+        lv_obj_set_style_opa(obj, LV_OPA_40, LV_PART_MAIN);
+    } else {
+        lv_obj_remove_state(obj, LV_STATE_DISABLED);
+        lv_obj_add_flag(obj, LV_OBJ_FLAG_CLICKABLE);
+        lv_obj_set_style_opa(obj, LV_OPA_COVER, LV_PART_MAIN);
+    }
 }
 
 static void clear_options(ha_control_select_t * st)
 {
     if(st == NULL) return;
-    if(st->buttons != NULL) {
-        for(uint32_t i = 0; i < st->option_count; i++) {
-            if(st->buttons[i] != NULL) {
-                lv_obj_delete(st->buttons[i]);
-            }
-        }
-        lv_free(st->buttons);
-        st->buttons = NULL;
+    if(st->map != NULL) {
+        lv_free(st->map);
+        st->map = NULL;
     }
     if(st->options_data != NULL) {
         lv_free(st->options_data);
@@ -392,32 +390,19 @@ static void clear_options(ha_control_select_t * st)
     st->option_count = 0;
 }
 
-static void relayout(ha_control_select_t * st)
+static void buttonmatrix_value_changed_cb(lv_event_t * e)
 {
-    if(st == NULL || st->row == NULL) return;
-    int32_t height = st->height > 0 ? st->height : DEFAULT_HEIGHT;
-    if(st->vertical) {
-        lv_obj_set_size(&st->obj, DEFAULT_HEIGHT, LV_PCT(100));
-        lv_obj_set_size(st->row, LV_PCT(100), LV_PCT(100));
-        lv_obj_set_flex_flow(st->row, LV_FLEX_FLOW_COLUMN);
-    } else {
-        lv_obj_set_size(&st->obj, LV_PCT(100), height);
-        lv_obj_set_size(st->row, LV_PCT(100), LV_PCT(100));
-        lv_obj_set_flex_flow(st->row, LV_FLEX_FLOW_ROW);
-    }
-    lv_obj_set_style_pad_all(st->row, DEFAULT_PAD, 0);
-    lv_obj_set_style_pad_column(st->row, DEFAULT_PAD, 0);
-    lv_obj_set_style_pad_row(st->row, DEFAULT_PAD, 0);
+    lv_obj_t * obj = lv_event_get_target(e);
+    ha_control_select_t * st = (ha_control_select_t *)obj;
+    if(st == NULL || st->disabled || st->options_data == NULL) return;
 
-    if(st->buttons != NULL) {
-        for(uint32_t i = 0; i < st->option_count; i++) {
-            if(st->buttons[i] != NULL) {
-                if(st->vertical) {
-                    lv_obj_set_width(st->buttons[i], LV_PCT(100));
-                } else {
-                    lv_obj_set_height(st->buttons[i], LV_PCT(100));
-                }
-            }
-        }
-    }
+    uint32_t btn_id = lv_buttonmatrix_get_selected_button(obj);
+    if(btn_id >= st->option_count) return;
+
+    if(strcmp(st->selected_value, st->options_data[btn_id].value) == 0) return;
+
+    lv_strlcpy(st->selected_value, st->options_data[btn_id].value, sizeof(st->selected_value));
+    st->value = st->selected_value;
+
+    lv_obj_send_event(obj, LV_EVENT_VALUE_CHANGED, (void *)st->selected_value);
 }

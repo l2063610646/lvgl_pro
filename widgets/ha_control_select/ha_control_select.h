@@ -11,22 +11,22 @@ extern "C" {
 #endif
 
 /*********************
+ *      INCLUDES
+ *********************/
+
+#include "lvgl/lvgl.h"
+
+/*********************
  *      DEFINES
  *********************/
 
 #define HA_CONTROL_SELECT_MAX_VALUE_LEN   32
 #define HA_CONTROL_SELECT_MAX_LABEL_LEN   48
-#define HA_CONTROL_SELECT_MAX_SYMBOL_LEN  16
+#define HA_CONTROL_SELECT_MAX_SYMBOL_LEN  32
 
 /**********************
  *      TYPEDEFS
  **********************/
-
-typedef struct {
-    char value[HA_CONTROL_SELECT_MAX_VALUE_LEN];
-    char label[HA_CONTROL_SELECT_MAX_LABEL_LEN];
-    char symbol[HA_CONTROL_SELECT_MAX_SYMBOL_LEN];
-} ha_control_select_option_store_t;
 
 typedef struct {
     const char * value;
@@ -34,15 +34,18 @@ typedef struct {
     const char * symbol;
 } ha_control_select_option_t;
 
+typedef struct {
+    char value[HA_CONTROL_SELECT_MAX_VALUE_LEN];
+    char label[HA_CONTROL_SELECT_MAX_LABEL_LEN];
+    char symbol[HA_CONTROL_SELECT_MAX_SYMBOL_LEN];
+    char display_text[96];
+} ha_control_select_option_store_t;
+
 #define HA_CONTROL_SELECT_USER_DATA \
-    lv_obj_t ** buttons; \
     ha_control_select_option_store_t * options_data; \
+    const char ** map; \
     uint32_t option_count; \
     char selected_value[HA_CONTROL_SELECT_MAX_VALUE_LEN];
-
-/*********************
- *      INCLUDES
- *********************/
 
 #include "ha_control_select_gen.h"
 
@@ -59,10 +62,6 @@ bool ha_control_select_get_disabled(lv_obj_t * obj);
 bool ha_control_select_get_vertical(lv_obj_t * obj);
 bool ha_control_select_get_hide_option_label(lv_obj_t * obj);
 lv_color_t ha_control_select_get_color(lv_obj_t * obj);
-
-/**********************
- *      MACROS
- **********************/
 
 #ifdef __cplusplus
 } /*extern "C"*/

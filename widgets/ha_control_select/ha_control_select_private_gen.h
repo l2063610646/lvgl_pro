@@ -33,7 +33,7 @@ extern "C" {
  *      TYPEDEFS
  **********************/
 typedef struct {
-    lv_obj_t obj;  /* Base widget to extend */
+    lv_buttonmatrix_t obj;  /* Base widget to extend */
     const char * value;
     const char * options;
     const char * label;
@@ -42,7 +42,6 @@ typedef struct {
     bool hide_option_label;
     lv_color_t color;
     lv_coord_t height;
-    lv_obj_t * row;
     HA_CONTROL_SELECT_USER_DATA
 } ha_control_select_t;
 

@@ -17,7 +17,7 @@
     #include "lvgl/lvgl_private.h"
 #endif
 
-#if LV_USE_XML
+#if defined(LV_USE_XML) && LV_USE_XML
 
 /*********************
  *      DEFINES
@@ -60,11 +60,13 @@ void ha_control_select_xml_apply(lv_xml_parser_state_t * state, const char ** at
 {
     void * item = lv_xml_state_get_item(state);
 
+    /* Apply common object properties like width, height, align, etc. */
     lv_xml_obj_apply(state, attrs);
 
-    for(int i = 0; attrs[i]; i += 2) {
+    for(int i = 0; attrs && attrs[i]; i += 2) {
         const char * name = attrs[i];
         const char * value = attrs[i + 1];
+
         if(lv_streq("value", name)) {
             ha_control_select_set_value(item, value);
         } else if(lv_streq("options", name)) {
@@ -75,12 +77,12 @@ void ha_control_select_xml_apply(lv_xml_parser_state_t * state, const char ** at
             ha_control_select_set_disabled(item, lv_xml_to_bool(value));
         } else if(lv_streq("vertical", name)) {
             ha_control_select_set_vertical(item, lv_xml_to_bool(value));
-        } else if(lv_streq("hide_option_label", name)) {
+        } else if(lv_streq("hide_option_label", name) || lv_streq("hide-option-label", name)) {
             ha_control_select_set_hide_option_label(item, lv_xml_to_bool(value));
         } else if(lv_streq("color", name)) {
             ha_control_select_set_color(item, lv_xml_to_color(value));
         } else if(lv_streq("height", name)) {
-            ha_control_select_set_height(item, lv_xml_atoi(value));
+            ha_control_select_set_height(item, lv_xml_to_size(value));
         }
     }
 }
