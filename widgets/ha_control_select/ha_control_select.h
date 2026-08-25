@@ -32,12 +32,16 @@ typedef struct {
     const char * value;
     const char * label;
     const char * symbol;
+    lv_color_t color;     /* Optional per-option highlight color */
+    bool has_color;
 } ha_control_select_option_t;
 
 typedef struct {
     char value[HA_CONTROL_SELECT_MAX_VALUE_LEN];
     char label[HA_CONTROL_SELECT_MAX_LABEL_LEN];
     char symbol[HA_CONTROL_SELECT_MAX_SYMBOL_LEN];
+    lv_color_t color;
+    bool has_color;
     char display_text[96];
 } ha_control_select_option_store_t;
 

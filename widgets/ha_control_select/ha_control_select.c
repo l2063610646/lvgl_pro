@@ -11,6 +11,7 @@
 #include "../../demo3.h"
 
 #include <string.h>
+#include <stdlib.h>
 
 /*********************
  *      DEFINES
@@ -33,6 +34,7 @@ static void rebuild_map(ha_control_select_t * st);
 static void update_styles(ha_control_select_t * st);
 static void clear_options(ha_control_select_t * st);
 static void buttonmatrix_value_changed_cb(lv_event_t * e);
+static lv_color_t parse_color_str(const char * str, bool * ok);
 
 /**********************
  *  STATIC VARIABLES
@@ -126,6 +128,8 @@ void ha_control_select_set_options_array(lv_obj_t * obj, const ha_control_select
         lv_strlcpy(st->options_data[i].value, options[i].value ? options[i].value : "", sizeof(st->options_data[i].value));
         lv_strlcpy(st->options_data[i].label, options[i].label ? options[i].label : st->options_data[i].value, sizeof(st->options_data[i].label));
         lv_strlcpy(st->options_data[i].symbol, options[i].symbol ? options[i].symbol : "", sizeof(st->options_data[i].symbol));
+        st->options_data[i].color = options[i].color;
+        st->options_data[i].has_color = options[i].has_color;
     }
 
     if(st->selected_value[0] == '\0' && count > 0) {
@@ -164,10 +168,11 @@ void ha_control_select_set_options(lv_obj_t * obj, const char * options_str)
             next_item++;
         }
 
-        /* Parse item fields: "value,label,symbol" or "value,label" or "value" */
+        /* Parse item fields: "value,label,symbol,color" or "value,label,symbol" or "value,label" or "value" */
         char * v = item;
         char * l = strchr(v, ',');
         char * s = NULL;
+        char * c = NULL;
         if(l != NULL) {
             *l = '\0';
             l++;
@@ -175,14 +180,27 @@ void ha_control_select_set_options(lv_obj_t * obj, const char * options_str)
             if(s != NULL) {
                 *s = '\0';
                 s++;
+                c = strchr(s, ',');
+                if(c != NULL) {
+                    *c = '\0';
+                    c++;
+                }
             }
         }
 
         opts[idx].value = v;
         opts[idx].label = l ? l : v;
         opts[idx].symbol = s ? s : "";
-        idx++;
+        opts[idx].has_color = false;
+        opts[idx].color = lv_color_hex(0);
 
+        if(c != NULL && c[0] != '\0') {
+            bool ok = false;
+            opts[idx].color = parse_color_str(c, &ok);
+            opts[idx].has_color = ok;
+        }
+
+        idx++;
         item = next_item;
     }
 
@@ -208,6 +226,8 @@ void ha_control_select_set_value(lv_obj_t * obj, const char * value)
             }
         }
     }
+
+    update_styles(st);
 }
 
 void ha_control_select_set_label(lv_obj_t * obj, const char * label)
@@ -303,6 +323,18 @@ lv_color_t ha_control_select_get_color(lv_obj_t * obj)
  *   STATIC FUNCTIONS
  **********************/
 
+static lv_color_t parse_color_str(const char * str, bool * ok)
+{
+    if(str == NULL || str[0] == '\0') {
+        if(ok) *ok = false;
+        return lv_color_hex(0);
+    }
+    if(str[0] == '#') str++;
+    uint32_t val = (uint32_t)strtoul(str, NULL, 16);
+    if(ok) *ok = true;
+    return lv_color_hex(val);
+}
+
 static void rebuild_map(ha_control_select_t * st)
 {
     if(st == NULL || st->options_data == NULL || st->option_count == 0) return;
@@ -361,9 +393,22 @@ static void update_styles(ha_control_select_t * st)
     if(st == NULL) return;
     lv_obj_t * obj = (lv_obj_t *)st;
 
+    /* Determine active color: check if currently selected option has a custom color */
+    lv_color_t active_color = st->color;
+    if(st->options_data != NULL) {
+        for(uint32_t i = 0; i < st->option_count; i++) {
+            if(strcmp(st->options_data[i].value, st->selected_value) == 0) {
+                if(st->options_data[i].has_color) {
+                    active_color = st->options_data[i].color;
+                }
+                break;
+            }
+        }
+    }
+
     /* Update selected item style */
-    lv_obj_set_style_bg_color(obj, st->color, LV_PART_ITEMS | LV_STATE_CHECKED);
-    lv_obj_set_style_bg_color(obj, st->color, LV_PART_ITEMS | LV_STATE_PRESSED);
+    lv_obj_set_style_bg_color(obj, active_color, LV_PART_ITEMS | LV_STATE_CHECKED);
+    lv_obj_set_style_bg_color(obj, active_color, LV_PART_ITEMS | LV_STATE_PRESSED);
 
     if(st->disabled) {
         lv_obj_add_state(obj, LV_STATE_DISABLED);
@@ -397,12 +442,14 @@ static void buttonmatrix_value_changed_cb(lv_event_t * e)
     if(st == NULL || st->disabled || st->options_data == NULL) return;
 
     uint32_t btn_id = lv_buttonmatrix_get_selected_button(obj);
-    if(btn_id >= st->option_count) return;
+    if(btn_id == LV_BUTTONMATRIX_BUTTON_NONE || btn_id >= st->option_count) return;
 
     if(strcmp(st->selected_value, st->options_data[btn_id].value) == 0) return;
 
     lv_strlcpy(st->selected_value, st->options_data[btn_id].value, sizeof(st->selected_value));
     st->value = st->selected_value;
+
+    update_styles(st);
 
     lv_obj_send_event(obj, LV_EVENT_VALUE_CHANGED, (void *)st->selected_value);
 }

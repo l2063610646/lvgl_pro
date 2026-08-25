@@ -50,9 +50,9 @@ lv_obj_t * ha_control_select_create(lv_obj_t * parent);
 void ha_control_select_set_value(lv_obj_t * ha_control_select, const char * value);
 
 /**
- * Semicolon-separated options (value,label,symbol or just values)
+ * Semicolon-separated options (value,label,symbol,color)
  * @param obj   pointer to a ha_control_select
- * @param options  Semicolon-separated options (value,label,symbol or just values)
+ * @param options  Semicolon-separated options (value,label,symbol,color)
  */
 void ha_control_select_set_options(lv_obj_t * ha_control_select, const char * options);
 
@@ -85,9 +85,9 @@ void ha_control_select_set_vertical(lv_obj_t * ha_control_select, bool vertical)
 void ha_control_select_set_hide_option_label(lv_obj_t * ha_control_select, bool hide_option_label);
 
 /**
- * Selected option highlight color
+ * Default selected option highlight color
  * @param obj   pointer to a ha_control_select
- * @param color  Selected option highlight color
+ * @param color  Default selected option highlight color
  */
 void ha_control_select_set_color(lv_obj_t * ha_control_select, lv_color_t color);
 

@@ -1,16 +1,16 @@
 <widget>
 	<previews>
-		<preview width="280" height="60" style_bg_color="0x212121" />
+		<preview width="320" height="60" style_bg_color="0x212121" />
 	</previews>
 
 	<api>
 		<prop name="value" type="string" default="" help="Selected value" />
-		<prop name="options" type="string" default="" help="Semicolon-separated options (value,label,symbol or just values)" />
+		<prop name="options" type="string" default="" help="Semicolon-separated options (value,label,symbol,color)" />
 		<prop name="label" type="string" default="" help="Control label" />
 		<prop name="disabled" type="bool" default="false" help="Disabled state" />
 		<prop name="vertical" type="bool" default="false" help="Vertical layout orientation" />
 		<prop name="hide_option_label" type="bool" default="false" help="Hide text labels in options" />
-		<prop name="color" type="color" default="0xFF6F22" help="Selected option highlight color" />
+		<prop name="color" type="color" default="0xFF6F22" help="Default selected option highlight color" />
 		<prop name="height" type="px" default="44" help="Height of the control" />
 	</api>
 
