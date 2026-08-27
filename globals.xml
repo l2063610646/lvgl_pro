@@ -46,6 +46,14 @@
 			range="0xF02DC,0xF0415,0xF0374,0xF0142"
 		/>
 		<bin
+			name="mdi_icon_font20_4"
+			as_file="false"
+			src_path="fonts/materialdesignicons-webfont.ttf"
+			bpp="4"
+			size="20"
+			range="0xF02DC,0xF0415,0xF0374,0xF0142"
+		/>
+		<bin
 			name="mdi_icon_font24_4"
 			as_file="false"
 			src_path="fonts/materialdesignicons-webfont.ttf"

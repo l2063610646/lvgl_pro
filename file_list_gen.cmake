@@ -6,6 +6,7 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font14_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font16_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font18_4_data.c
+  ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font20_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font24_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font36_4_data.c
   ${CMAKE_CURRENT_LIST_DIR}/fonts/mdi_icon_font48_4_data.c
@@ -25,6 +26,9 @@ list(
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider_xml_parser.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_circular_slider/ha_control_circular_slider.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_select_menu_simple/ha_control_select_menu_simple_gen.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_select_menu_simple/ha_control_select_menu_simple_xml_parser.c
+  ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_select_menu_simple/ha_control_select_menu_simple.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_select/ha_control_select_gen.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_select/ha_control_select_xml_parser.c
   ${CMAKE_CURRENT_LIST_DIR}/widgets/ha_control_select/ha_control_select.c
